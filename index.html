@@ -31,6 +31,10 @@ button,input,select,textarea{font:inherit}.app{min-height:100vh;padding:15px}.gl
 @media(max-width:1200px){.layout{grid-template-columns:210px 1fr}.machinegrid{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:800px){.app{padding:8px}.top{height:64px;padding:7px 9px}.logo{height:47px}.status{display:none}.mobile{display:block}.layout{display:block}.sidebar{position:fixed;z-index:40;top:80px;bottom:8px;left:8px;width:240px;transform:translateX(-120%);transition:.25s;box-shadow:0 20px 60px #000}.sidebar.open{transform:none}.hero{min-height:200px;padding:28px 20px}.hero h1{font-size:42px}.hero p{font-size:16px}.grid2,.grid3,.grid4,.machinegrid{grid-template-columns:1fr}.form{grid-template-columns:1fr}.full{grid-column:auto}.section{padding:15px}.table{min-width:590px}}
 @media(max-width:500px){.kpis{grid-template-columns:1fr}.hero h1{font-size:36px}.head h2{font-size:17px}.act{grid-template-columns:25px 1fr}.act time{display:none}}
+
+/* AEI Assistant — chat integrado estilo juego */
+.ai-orb{position:fixed;right:22px;bottom:22px;width:64px;height:64px;border-radius:50%;border:1px solid #42adff;background:radial-gradient(circle at 35% 30%,#42c7ff,#0759c9 60%,#03152b);box-shadow:0 0 25px #1597ff66,0 12px 35px #0009;z-index:70;cursor:pointer;color:#fff;font-size:25px;display:grid;place-items:center;transition:.2s}.ai-orb:hover{transform:scale(1.06);box-shadow:0 0 35px #1597ff99,0 12px 35px #0009}.ai-orb .ai-dot{position:absolute;right:3px;top:3px;width:13px;height:13px;border-radius:50%;background:#00e58a;box-shadow:0 0 12px #00e58a}.ai-chat{position:fixed;right:22px;bottom:98px;width:min(410px,calc(100vw - 28px));height:min(620px,calc(100vh - 125px));background:linear-gradient(145deg,#061a31f5,#020a14f5);border:1px solid #2699ff80;border-radius:20px;box-shadow:0 25px 80px #000c,0 0 35px #007eff24;backdrop-filter:blur(22px);z-index:69;display:none;overflow:hidden}.ai-chat.open{display:flex;flex-direction:column}.ai-head{height:68px;padding:11px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ffffff12;background:#061b31cc}.ai-avatar{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#1597ff,#063c9c);box-shadow:0 0 20px #1597ff44;font-weight:900}.ai-head strong{display:block}.ai-head small{display:block;color:#8ea6c2;margin-top:2px}.ai-close{margin-left:auto;border:0;background:none;color:#fff;font-size:24px;cursor:pointer}.ai-messages{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}.ai-msg{max-width:88%;padding:10px 12px;border-radius:14px;line-height:1.42;font-size:13px;white-space:pre-wrap}.ai-msg.bot{align-self:flex-start;background:#0a2440;border:1px solid #2699ff2d}.ai-msg.user{align-self:flex-end;background:linear-gradient(100deg,#075cc8,#087eff);border:1px solid #42adff66}.ai-quick{display:flex;gap:6px;overflow:auto;padding:0 12px 9px}.ai-quick button{white-space:nowrap;border:1px solid #2699ff40;background:#09223a;color:#dcecff;border-radius:20px;padding:7px 10px;font-size:11px;cursor:pointer}.ai-input{display:flex;gap:7px;padding:10px;border-top:1px solid #ffffff12;background:#041321}.ai-input textarea{flex:1;resize:none;height:43px;background:#071b2e;border:1px solid #3b86bd4c;border-radius:11px;color:#fff;padding:11px;outline:none}.ai-send{width:45px;border:1px solid #42adff;background:#087eff;border-radius:11px;color:#fff;cursor:pointer}.ai-note{text-align:center;color:#607b99;font-size:9px;padding:0 10px 7px}
+@media(max-width:600px){.ai-orb{right:14px;bottom:14px;width:58px;height:58px}.ai-chat{right:10px;bottom:80px;width:calc(100vw - 20px);height:calc(100vh - 105px);border-radius:18px}}
 </style>
 </head>
 <body>
@@ -125,6 +129,25 @@ button,input,select,textarea{font:inherit}.app{min-height:100vh;padding:15px}.gl
 
 <div class="modal" id="modal"><div class="modalbox glass"><div class="modalhead"><h2 id="modalTitle"></h2><button class="close" onclick="closeModal()">×</button></div><div id="modalBody" style="margin-top:15px"></div></div></div>
 <div class="toast" id="toast"></div>
+<!-- Asistente AEI integrado -->
+<button class="ai-orb" id="aiOrb" type="button" aria-label="Abrir Asistente AEI">✦<span class="ai-dot"></span></button>
+<section class="ai-chat" id="aiChat" aria-label="Asistente AEI">
+  <div class="ai-head">
+    <div class="ai-avatar">AEI</div>
+    <div><strong>Asistente AEI</strong><small>Control inteligente • listo</small></div>
+    <button class="ai-close" id="aiClose" type="button">×</button>
+  </div>
+  <div class="ai-messages" id="aiMessages"></div>
+  <div class="ai-quick">
+    <button data-q="¿Qué necesita atención ahora?">¿Qué necesita atención?</button>
+    <button data-q="¿Cómo está la producción?">Producción</button>
+    <button data-q="¿Qué máquinas tienen problemas?">Máquinas</button>
+    <button data-q="¿Qué mantenimiento está pendiente?">Mantenimiento</button>
+  </div>
+  <div class="ai-input"><textarea id="aiInput" placeholder="Escribe a AEI..." rows="1"></textarea><button class="ai-send" id="aiSend" type="button">➤</button></div>
+  <div class="ai-note">Asistente integrado en AEI Control. Puede consultar los datos de esta aplicación.</div>
+</section>
+
 
 <script>
 const DEMO={
@@ -222,8 +245,8 @@ function completeMaintenance(id){const x=data.maintenance.find(v=>v.id===id);if(
 function renderAlerts(){const b=document.getElementById("alertsList");if(!b)return;b.innerHTML=data.alerts.map(a=>`<div class="alert"><div class="aicon">${a.type==="danger"?"⛔":a.type==="warning"?"⚠":"ℹ"}</div><div style="flex:1"><h4>${a.title}</h4><p>${a.desc}</p><small>${a.time}</small></div><button class="btn small" onclick="dismissAlert(${a.id})">Atender</button></div>`).join("");document.getElementById("alertBadge").textContent=data.alerts.length;document.getElementById("kAlerts").textContent=data.alerts.length}
 function dismissAlert(id){data.alerts=data.alerts.filter(a=>a.id!==id);save();render();toast("Alerta atendida")}
 function clearAlerts(){data.alerts=[];save();render();toast("Alertas atendidas")}
-function inventoryModal(){openModal("Agregar artículo",`<div class="form"><div class="field"><label>Artículo</label><input id="invName"></div><div class="field"><label>Código</label><input id="ic"></div><div class="field"><label>Categoría</label><input id="ix"></div><div class="field"><label>Stock</label><input id="is" type="number" value="0"></div><div class="field"><label>Mínimo</label><input id="im" type="number" value="5"></div></div><button class="btn primary" style="margin-top:14px;width:100%" onclick="saveInventory()">Guardar</button>`)}
-function saveInventory(){data.inventory.push({id:Date.now(),name:invName.value,code:ic.value,cat:ix.value,stock:+is.value||0,min:+im.value||0});save();closeModal();render();toast("Artículo agregado")}
+function inventoryModal(){openModal("Agregar artículo",`<div class="form"><div class="field"><label>Artículo</label><input id="in"></div><div class="field"><label>Código</label><input id="ic"></div><div class="field"><label>Categoría</label><input id="ix"></div><div class="field"><label>Stock</label><input id="is" type="number" value="0"></div><div class="field"><label>Mínimo</label><input id="im" type="number" value="5"></div></div><button class="btn primary" style="margin-top:14px;width:100%" onclick="saveInventory()">Guardar</button>`)}
+function saveInventory(){data.inventory.push({id:Date.now(),name:in.value,code:ic.value,cat:ix.value,stock:+is.value||0,min:+im.value||0});save();closeModal();render();toast("Artículo agregado")}
 function renderInventory(){const t=document.getElementById("inventoryTable");if(!t)return;const q=(document.getElementById("inventorySearch")?.value||"").toLowerCase();t.innerHTML=data.inventory.filter(x=>(x.name+x.code+x.cat).toLowerCase().includes(q)).map(x=>`<tr><td>${x.name}</td><td>${x.code}</td><td>${x.cat}</td><td>${x.stock}</td><td>${x.min}</td><td class="${x.stock<=x.min?"yellow":"green"}">${x.stock<=x.min?"Bajo":"OK"}</td><td><button class="btn small" onclick="adjustStock(${x.id})">Ajustar</button></td></tr>`).join("")}
 function adjustStock(id){const x=data.inventory.find(v=>v.id===id);const n=prompt("Nuevo stock:",x.stock);if(n!==null&&!isNaN(+n)){x.stock=+n;save();render();toast("Stock actualizado")}}
 function userModal(){openModal("Agregar usuario",`<div class="form"><div class="field"><label>Nombre</label><input id="un"></div><div class="field"><label>Usuario</label><input id="uu"></div><div class="field"><label>Rol</label><select id="ur"><option>Administrador</option><option>Supervisor</option><option>Operador</option><option>Solo lectura</option></select></div></div><button class="btn primary" style="margin-top:14px;width:100%" onclick="saveUser()">Guardar</button>`)}
@@ -242,6 +265,59 @@ function exportProduction(){const rows=[["Hora","Máquina","Lote","Total","Buena
 function exportAll(){const rows=[["Máquina","Estado","Piezas","Horas","Temperatura"],...data.machines.map(m=>[m.name,m.status,m.pieces,m.hours,m.temp])];downloadCSV(rows,"aei-resumen.csv")}
 function downloadCSV(rows,name){const csv=rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download=name;a.click();URL.revokeObjectURL(a.href);toast("Archivo exportado")}
 function render(){renderMachines();renderProduction();renderOrders();renderMaintenance();renderAlerts();renderInventory();renderUsers();renderHome();renderCharts()}
+
+/* =========================
+   ASISTENTE AEI INTEGRADO
+   ========================= */
+const aiOrb=document.getElementById("aiOrb"),aiChat=document.getElementById("aiChat"),aiClose=document.getElementById("aiClose"),aiMessages=document.getElementById("aiMessages"),aiInput=document.getElementById("aiInput"),aiSend=document.getElementById("aiSend");
+function aiOpen(){aiChat.classList.add("open");aiInput.focus();if(!aiMessages.children.length)aiBot("Hola. Soy el Asistente AEI. Puedo consultar producción, máquinas, órdenes, mantenimiento, alertas e inventario. ¿Qué necesitas?")}
+function aiClosePanel(){aiChat.classList.remove("open")}
+function aiBot(t){const d=document.createElement("div");d.className="ai-msg bot";d.textContent=t;aiMessages.appendChild(d);aiMessages.scrollTop=aiMessages.scrollHeight}
+function aiUser(t){const d=document.createElement("div");d.className="ai-msg user";d.textContent=t;aiMessages.appendChild(d);aiMessages.scrollTop=aiMessages.scrollHeight}
+function aiNumber(n){return Number(n||0).toLocaleString("es-US")}
+function aiAnswer(q){
+ const s=q.toLowerCase();
+ const active=data.machines.filter(m=>m.status==="Operativa");
+ const problems=data.machines.filter(m=>m.status!=="Operativa");
+ const prod=data.productions.reduce((a,p)=>a+p.total,0);
+ const good=data.productions.reduce((a,p)=>a+p.good,0);
+ const bad=data.productions.reduce((a,p)=>a+p.bad,0);
+ if(/hola|buenos|buenas|hey/.test(s))return"Hola. Estoy listo. Dime qué quieres saber o hacer en AEI Control.";
+ if(/atenci|problema|urgente|qué.*pasando|que.*pasando/.test(s)){
+   const a=data.alerts.map(x=>"• "+x.title).join("\n")||"• No hay alertas pendientes.";
+   return `Ahora mismo hay ${data.alerts.length} alerta(s).\n\n${a}\n\nMáquinas que no están operativas: ${problems.length}.`;
+ }
+ if(/producci|piezas|produj|cuánto.*hoy|cuanto.*hoy/.test(s)){
+   return `Producción registrada en esta sesión: ${aiNumber(prod)} piezas.\nBuenas: ${aiNumber(good)}.\nRechazadas: ${aiNumber(bad)}.\nCalidad calculada: ${prod?((good/prod)*100).toFixed(1):"0"}%.`;
+ }
+ if(/máquina|maquina|cnc/.test(s)){
+   return `Estado de máquinas:\n🟢 Operativas: ${active.length}\n🟠/🔴 Atención o detenidas: ${problems.length}\n\n${data.machines.map(m=>`${m.name}: ${m.status} — ${m.pieces} piezas`).join("\n")}`;
+ }
+ if(/mantenimiento|servicio|revisi/.test(s)){
+   const p=data.maintenance.filter(x=>x.status!=="Completado");
+   return p.length?`Hay ${p.length} trabajo(s) pendiente(s):\n\n${p.map(x=>`• ${x.machine} — ${x.work} — ${x.status}`).join("\n")}`:"No hay mantenimientos pendientes.";
+ }
+ if(/orden|pedido|trabajo/.test(s)){
+   const open=data.orders.filter(o=>o.status!=="Completada");
+   return `Hay ${open.length} orden(es) abiertas.\n\n${open.map(o=>`• ${o.id} — ${o.product} — ${o.qty} — ${o.status}`).join("\n")||"No hay órdenes abiertas."}`;
+ }
+ if(/inventario|stock|repuesto|material/.test(s)){
+   const low=data.inventory.filter(x=>x.stock<=x.min);
+   return low.length?`Hay ${low.length} artículo(s) con stock bajo:\n\n${low.map(x=>`• ${x.name}: ${x.stock} (mínimo ${x.min})`).join("\n")}`:"El inventario está por encima de los mínimos.";
+ }
+ if(/alerta/.test(s))return data.alerts.length?`Hay ${data.alerts.length} alerta(s) pendiente(s). Puedes abrir Alertas para atenderlas.`:"No hay alertas pendientes.";
+ if(/oee|rendimiento|eficiencia/.test(s))return"El OEE mostrado actualmente es 86%, con disponibilidad de 92%, performance de 89% y calidad de 97.5%.";
+ if(/gracias|ok|perfecto/.test(s))return"Perfecto. Estoy aquí.";
+ return "Puedo ayudarte con producción, máquinas, órdenes, mantenimiento, alertas, inventario y rendimiento. También puedo llevarte directamente al módulo que necesitas. Prueba: “¿qué necesita atención?”";
+}
+function aiSendMessage(text){
+ const q=(text||"").trim();if(!q)return;aiUser(q);aiInput.value="";
+ setTimeout(()=>aiBot(aiAnswer(q)),120);
+}
+aiOrb.addEventListener("click",aiOpen);aiClose.addEventListener("click",aiClosePanel);aiSend.addEventListener("click",()=>aiSendMessage(aiInput.value));
+aiInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();aiSendMessage(aiInput.value)}});
+document.querySelectorAll(".ai-quick button").forEach(b=>b.addEventListener("click",()=>aiSendMessage(b.dataset.q)));
+
 render();
 </script>
 </body>

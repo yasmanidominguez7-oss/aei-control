@@ -70,3 +70,10 @@ están preparados para esa integración sin cambiar el flujo sencillo para el op
 PWA MÓVIL
 ---------
 Esta versión incluye navegación táctil reforzada y caché v2 para evitar que la aplicación instalada conserve una versión anterior.
+
+ASISTENTE AEI
+--------------
+Incluye un chat integrado estilo interfaz de juego: botón flotante, panel propio,
+respuestas sobre datos de producción/máquinas/órdenes/mantenimiento/alertas/inventario,
+y accesos rápidos. Funciona localmente sin API externa; la conexión a un modelo de IA
+externo puede añadirse después sin cambiar la interfaz.
