@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#020711">
+<meta name="description" content="AEI Control — American Engineering Inc.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo.jpg" type="image/jpeg">
+<title>AEI Control — American Engineering Inc.</title>
+<style>
+:root{
+ --bg:#020711;--panel:rgba(7,19,35,.78);--panel2:rgba(8,28,52,.72);
+ --line:rgba(62,157,255,.38);--blue:#1597ff;--green:#00e58a;
+ --orange:#ffae19;--purple:#8d4dff;--red:#ff3038;
+ --text:#f4f8ff;--muted:#91a7c2
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg)}
+body{
+ overflow-x:hidden;
+ background:radial-gradient(circle at 48% 8%,rgba(0,111,255,.18),transparent 31%),
+ linear-gradient(145deg,#02050b 0%,#03101e 52%,#02060d 100%)
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;
+ background-image:linear-gradient(rgba(52,129,207,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(52,129,207,.07) 1px,transparent 1px);
+ background-size:42px 42px}
+.app{min-height:100vh;padding:18px}
+.glass,.card{
+ background:linear-gradient(145deg,rgba(12,31,54,.82),rgba(3,12,24,.76));
+ border:1px solid var(--line);border-radius:18px;
+ box-shadow:0 20px 60px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.035);
+ backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+}
+.topbar{height:82px;display:flex;align-items:center;justify-content:space-between;padding:9px 18px;margin-bottom:16px}
+.logo{height:64px;width:auto;max-width:340px;object-fit:contain}
+.status-area{display:flex;align-items:center;gap:12px}
+.status{display:flex;align-items:center;gap:10px;padding:10px 18px;border-left:1px solid #ffffff18;border-right:1px solid #ffffff18}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 15px var(--green)}
+.status strong{display:block}.status small{display:block;color:#9db0c9;margin-top:3px}
+.icon-btn{width:50px;height:50px;border:1px solid #3499ff40;border-radius:14px;background:#081b30a8;color:white;font-size:22px;cursor:pointer}
+.icon-btn:hover{border-color:var(--blue);box-shadow:0 0 24px #007eff38}
+.layout{display:grid;grid-template-columns:255px minmax(0,1fr) 325px;gap:18px}
+.sidebar{min-height:calc(100vh - 134px);padding:10px;display:flex;flex-direction:column}
+.nav{display:flex;flex-direction:column;gap:7px}
+.nav button{display:flex;align-items:center;gap:17px;height:62px;border:1px solid transparent;border-radius:14px;background:transparent;color:#d9e6f8;padding:0 19px;font-size:18px;cursor:pointer}
+.nav button:hover{background:#10447847;border-color:#2891ff3d}
+.nav button.active{background:linear-gradient(100deg,#0066ff8c,#0a418260);border-color:#159cff;box-shadow:0 0 26px #0075ff2e}
+.ico{width:27px;text-align:center;font-size:25px}
+.badge{margin-left:auto;background:var(--red);color:#fff;border-radius:50%;min-width:29px;height:29px;display:grid;place-items:center;font-size:13px;font-weight:700}
+.sidebar-bottom{margin-top:auto;min-height:210px;border-radius:16px;padding:18px;display:flex;align-items:flex-end;justify-content:center;text-align:center;color:#9ec5ee;position:relative;overflow:hidden}
+.gear{position:absolute;width:190px;height:190px;border:28px dotted #075be1;border-radius:50%;left:-35px;bottom:-75px;opacity:.7;transform:rotate(12deg)}
+.gear:after{content:"";position:absolute;inset:35px;border:25px solid #063d99;border-radius:50%;background:#031024}
+.tagline{position:relative;z-index:1;line-height:1.7;font-size:16px}
+.hero{min-height:263px;position:relative;overflow:hidden;padding:44px 30px;margin-bottom:18px}
+.hero:before{content:"";position:absolute;inset:0;background:
+ radial-gradient(circle at 76% 55%,#199cff38,transparent 24%),
+ linear-gradient(90deg,#030e1cf7 0%,#030e1cc2 43%,#030e1c2e 100%)}
+.hero:after{content:"CNC";position:absolute;right:4%;top:10%;font-size:150px;font-weight:900;letter-spacing:-12px;color:#2283db0e;transform:skew(-8deg)}
+.hero-content{position:relative;z-index:2;max-width:610px}
+.welcome{font-size:23px;color:#b6d5f4;margin-bottom:8px}
+.hero h1{font-size:61px;line-height:1;margin:0 0 18px;font-weight:800;letter-spacing:-2px}
+.hero p{font-size:22px;line-height:1.4;color:#d3e2f3;margin:0}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.kpi{padding:20px 21px;min-height:198px;position:relative;overflow:hidden}
+.kpi:after{content:"";position:absolute;left:22px;right:22px;bottom:21px;height:8px;border-radius:10px;background:#4489ce40}
+.progress{position:absolute;left:22px;bottom:21px;height:8px;border-radius:10px}
+.kpi-icon{width:59px;height:59px;border-radius:50%;display:grid;place-items:center;font-size:28px;margin-bottom:16px;border:1px solid currentColor;box-shadow:0 0 24px currentColor}
+.green .kpi-icon{color:#00e58a;background:#00e58a21}.green .progress{background:#00e58a;width:82%}
+.blue .kpi-icon{color:#178fff;background:#178fff21}.blue .progress{background:#178fff;width:75%}
+.orange .kpi-icon{color:#ffad16;background:#ffad1621}.orange .progress{background:#ffad16;width:90%}
+.purple .kpi-icon{color:#9a5cff;background:#9a5cff21}.purple .progress{background:#9a5cff;width:78%}
+.kpi-label{font-size:16px;color:#c4d3e6}.kpi-value{font-size:30px;font-weight:800;margin-top:7px}.kpi-sub{font-size:14px;color:#b4c7df;margin-top:2px}
+.activity{padding:20px 24px}
+.section-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #73a3cf29;padding-bottom:14px;margin-bottom:4px}
+.section-head h2{font-size:20px;margin:0}.section-head a{color:#23a0ff;text-decoration:none;font-size:14px}
+.activity-row{display:grid;grid-template-columns:18px 42px 1fr auto;align-items:center;gap:13px;min-height:62px;border-bottom:1px solid #73a3cf1f}
+.activity-row:last-child{border-bottom:0}
+.state-dot{width:13px;height:13px;border-radius:50%;box-shadow:0 0 13px currentColor}
+.ok{color:#00df7e;background:#00df7e}.warn{color:#ffad16;background:#ffad16}.info{color:#168fff;background:#168fff}
+.event-icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#154b8266;border:1px solid #5ba6ef38;font-size:19px}
+.event-title{font-size:15px}.event-sub{font-size:13px;color:#8ea5c1;margin-top:3px}.event-time{font-size:14px;color:#a9bed8}
+.side{display:flex;flex-direction:column;gap:18px}
+.quick,.system,.quote{padding:20px}
+.side h2{font-size:19px;margin:0 0 15px}
+.quick-item{height:56px;display:flex;align-items:center;gap:13px;padding:0 14px;margin:9px 0;border:1px solid #539bdc3b;background:#13345673;border-radius:13px;cursor:pointer}
+.quick-item:hover{border-color:#188fff;box-shadow:0 0 20px #0082ff24}
+.quick-item span:last-child{margin-left:auto;color:#9bb8d6;font-size:25px}
+.system-head{display:flex;align-items:center;justify-content:space-between}
+.online{color:#00e58a;background:#00e58a12;border:1px solid #00e58a2b;padding:8px 12px;border-radius:20px;font-size:14px}
+.sys-row{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-top:1px solid #73a3cf21;color:#bfd0e5}
+.sys-ok{color:#00e58a}.sys-ok:before{content:"";display:inline-block;width:11px;height:11px;background:#00e58a;border-radius:50%;margin-right:9px;box-shadow:0 0 12px #00e58a}
+.quote{min-height:185px;display:flex;align-items:center;position:relative;overflow:hidden}
+.quote p{font-size:18px;line-height:1.5;color:#d8e6f5;max-width:230px;margin:0}.quote:after{content:"⚙";position:absolute;right:-18px;bottom:-45px;font-size:145px;color:#0054dc6b;transform:rotate(14deg)}
+.footer{text-align:center;color:#6f87a5;font-size:13px;padding:14px 0 2px}
+.mobile-menu{display:none}
+.toast{position:fixed;right:22px;bottom:22px;padding:13px 18px;background:#071b31;border:1px solid #168fff;border-radius:12px;box-shadow:0 10px 35px #0008;opacity:0;transform:translateY(15px);transition:.25s;z-index:20}
+.toast.show{opacity:1;transform:none}
+@media(max-width:1200px){.layout{grid-template-columns:220px minmax(0,1fr)}.side{grid-column:2;display:grid;grid-template-columns:1fr 1fr}.quote{grid-column:span 2}.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){
+ .app{padding:10px}.topbar{height:68px;padding:7px 10px}.logo{height:49px}.status{display:none}
+ .layout{display:block}.sidebar{position:fixed;z-index:15;left:10px;top:88px;bottom:10px;width:245px;transform:translateX(-120%);transition:.25s;box-shadow:0 20px 60px #000}
+ .sidebar.open{transform:none}.mobile-menu{display:block}
+ .hero{min-height:245px;padding:30px 22px}.hero h1{font-size:43px}.hero p{font-size:17px}.welcome{font-size:18px}
+ .kpis{grid-template-columns:1fr 1fr}.kpi{min-height:175px}.kpi-value{font-size:26px}
+}
+@media(max-width:520px){.kpis{grid-template-columns:1fr}.hero h1{font-size:38px}.hero:after{font-size:90px}.activity-row{grid-template-columns:12px 38px 1fr}.event-time{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar glass">
+ <button class="icon-btn mobile-menu" onclick="toggleMenu()">☰</button>
+ <img class="logo" src="logo.jpg" alt="American Engineering Inc.">
+ <div class="status-area">
+  <div class="status"><span class="dot"></span><div><strong>Sistema Activo</strong><small>AEI Control v1.0</small></div></div>
+  <button class="icon-btn" onclick="notify('Configuración del sistema')">⚙</button>
+  <button class="icon-btn" onclick="notify('Perfil de usuario')">◯</button>
+ </div>
+</header>
+<div class="layout">
+<aside class="sidebar glass" id="sidebar">
+<nav class="nav">
+ <button class="active" onclick="selectNav(this,'Inicio')"><span class="ico">⌂</span>Inicio</button>
+ <button onclick="selectNav(this,'Máquinas')"><span class="ico">▣</span>Máquinas</button>
+ <button onclick="selectNav(this,'Producción')"><span class="ico">▥</span>Producción</button>
+ <button onclick="selectNav(this,'Alertas')"><span class="ico">♧</span>Alertas <span class="badge">3</span></button>
+ <button onclick="selectNav(this,'Reportes')"><span class="ico">▤</span>Reportes</button>
+ <button onclick="selectNav(this,'Configuración')"><span class="ico">⚙</span>Configuración</button>
+</nav>
+<div class="sidebar-bottom"><div class="gear"></div><div class="tagline">Eficiencia&nbsp; • &nbsp;Control<br>Resultados</div></div>
+</aside>
+<main class="main">
+<section class="hero glass"><div class="hero-content"><div class="welcome">Bienvenido a</div><h1>AEI Control</h1><p>Monitorea, controla y optimiza tu producción<br>en tiempo real.</p></div></section>
+<section class="kpis">
+<article class="kpi card green"><div class="kpi-icon">▣</div><div class="kpi-label">Máquinas Activas</div><div class="kpi-value">4 / 5</div><div class="kpi-sub">80% operativas</div><div class="progress"></div></article>
+<article class="kpi card blue"><div class="kpi-icon">▥</div><div class="kpi-label">Producción Hoy</div><div class="kpi-value">1,248</div><div class="kpi-sub">Piezas</div><div class="progress"></div></article>
+<article class="kpi card orange"><div class="kpi-icon">♧</div><div class="kpi-label">Alertas</div><div class="kpi-value">3</div><div class="kpi-sub">Requieren atención</div><div class="progress"></div></article>
+<article class="kpi card purple"><div class="kpi-icon">◷</div><div class="kpi-label">Tiempo de Operación</div><div class="kpi-value">18.6 h</div><div class="kpi-sub">Hoy</div><div class="progress"></div></article>
+</section>
+<section class="activity card">
+<div class="section-head"><h2>◷ &nbsp;Actividad Reciente</h2><a href="#" onclick="notify('Mostrando toda la actividad');return false">Ver todo →</a></div>
+<div class="activity-row"><span class="state-dot ok"></span><span class="event-icon">▣</span><div><div class="event-title">Máquina CNC-02</div><div class="event-sub">Producción completada - Lote #4587</div></div><span class="event-time">Hoy, 10:42 AM</span></div>
+<div class="activity-row"><span class="state-dot warn"></span><span class="event-icon">⚠</span><div><div class="event-title">Máquina CNC-03</div><div class="event-sub">Alerta de temperatura alta</div></div><span class="event-time">Hoy, 09:17 AM</span></div>
+<div class="activity-row"><span class="state-dot ok"></span><span class="event-icon">▤</span><div><div class="event-title">Máquina CNC-01</div><div class="event-sub">Reanudó operación</div></div><span class="event-time">Hoy, 08:55 AM</span></div>
+<div class="activity-row"><span class="state-dot info"></span><span class="event-icon">▥</span><div><div class="event-title">Producción</div><div class="event-sub">Meta del día alcanzada (78%)</div></div><span class="event-time">Hoy, 07:32 AM</span></div>
+<div class="activity-row"><span class="state-dot ok"></span><span class="event-icon">✣</span><div><div class="event-title">Sistema</div><div class="event-sub">Respaldo automático completado</div></div><span class="event-time">Hoy, 06:15 AM</span></div>
+</section>
+</main>
+<aside class="side">
+<section class="quick glass"><h2>Accesos Rápidos</h2>
+<div class="quick-item" onclick="notify('Módulo Máquinas')"><span>▣</span><span>Ver Máquinas</span><span>›</span></div>
+<div class="quick-item" onclick="notify('Módulo Producción')"><span>▥</span><span>Ver Producción</span><span>›</span></div>
+<div class="quick-item" onclick="notify('Historial de Alertas')"><span>♧</span><span>Historial de Alertas</span><span>›</span></div>
+<div class="quick-item" onclick="notify('Generando reporte...')"><span>▤</span><span>Generar Reporte</span><span>›</span></div>
+</section>
+<section class="system glass"><div class="system-head"><h2>Estado del Sistema</h2><span class="online">● &nbsp;En línea</span></div>
+<div class="sys-row"><span>▣ &nbsp; Servidor</span><span class="sys-ok">OK</span></div>
+<div class="sys-row"><span>▤ &nbsp; Base de Datos</span><span class="sys-ok">OK</span></div>
+<div class="sys-row"><span>♧ &nbsp; Red</span><span class="sys-ok">OK</span></div>
+<div class="sys-row"><span>⚙ &nbsp; Módulos</span><span class="sys-ok">OK</span></div></section>
+<section class="quote glass"><p>“La ingeniería construye el presente,<br>la tecnología impulsa el futuro.”</p></section>
+</aside>
+</div>
+<div class="footer">© 2026 American Engineering Inc. — AEI Control</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+function notify(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),1800)}
+function selectNav(btn,name){document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');notify('Módulo: '+name);if(innerWidth<=800)document.getElementById('sidebar').classList.remove('open')}
+function toggleMenu(){document.getElementById('sidebar').classList.toggle('open')}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>
