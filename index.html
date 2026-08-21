@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#020711">
+<meta name="description" content="AEI Control — American Engineering Inc.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo.jpg">
+<title>AEI Control — American Engineering Inc.</title>
+<style>
+:root{--bg:#020711;--panel:#07182bdd;--panel2:#0a2340d9;--line:#2499ff55;--blue:#1498ff;--cyan:#00c9ff;--green:#00e58a;--yellow:#ffb020;--red:#ff4350;--purple:#995cff;--text:#f5f9ff;--muted:#8ea6c2;--shadow:0 18px 55px #0008}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg)}body{overflow-x:hidden;background:radial-gradient(circle at 48% 0,#087cff2a,transparent 32%),linear-gradient(145deg,#02050b,#03101e 52%,#02060d)}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:linear-gradient(#3481cf12 1px,transparent 1px),linear-gradient(90deg,#3481cf12 1px,transparent 1px);background-size:42px 42px}
+button,input,select,textarea{font:inherit}.app{min-height:100vh;padding:15px}.glass,.card{background:linear-gradient(145deg,#0c2038cf,#030d1acb);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow),inset 0 1px #fff09;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.top{height:78px;padding:8px 17px;display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.logo{height:60px;max-width:340px;width:auto;object-fit:contain}.topright{display:flex;align-items:center;gap:9px}.status{display:flex;align-items:center;gap:9px;padding:9px 15px;border-left:1px solid #fff1;border-right:1px solid #fff1}.dot{width:11px;height:11px;border-radius:50%;background:var(--green);box-shadow:0 0 15px var(--green)}.status small{display:block;color:var(--muted);margin-top:2px}.icon{width:47px;height:47px;border:1px solid #2699ff44;border-radius:13px;background:#081b30c9;color:#fff;cursor:pointer}.icon:hover{border-color:var(--blue);box-shadow:0 0 20px #007eff30}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:15px}.sidebar{min-height:calc(100vh - 123px);padding:10px;display:flex;flex-direction:column}.nav{display:flex;flex-direction:column;gap:6px}.nav button{height:56px;border:1px solid transparent;border-radius:13px;background:transparent;color:#dce9f9;display:flex;align-items:center;gap:14px;padding:0 16px;text-align:left;cursor:pointer;font-size:16px}.nav button:hover{background:#10447840;border-color:#2891ff32}.nav button.active{background:linear-gradient(100deg,#0066ff91,#0a41825c);border-color:#159cff;box-shadow:0 0 25px #0075ff26}.ni{width:25px;text-align:center;font-size:21px}.badge{margin-left:auto;min-width:26px;height:26px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-size:11px}.sidebar-bottom{margin-top:auto;min-height:190px;display:grid;place-items:end center;text-align:center;padding:16px;position:relative;overflow:hidden;color:#9ec5ee}.gear{position:absolute;width:185px;height:185px;border:27px dotted #075be1;border-radius:50%;left:-42px;bottom:-78px;opacity:.7}.gear:after{content:"";position:absolute;inset:34px;border:23px solid #063d99;border-radius:50%;background:#031024}.tag{z-index:1;line-height:1.7}
+.main{min-width:0}.view{display:none}.view.active{display:block}.hero{min-height:220px;padding:34px 29px;position:relative;overflow:hidden;margin-bottom:15px}.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 52%,#199cff38,transparent 25%),linear-gradient(90deg,#030e1cf7,#030e1cba 46%,#030e1c20)}.hero:after{content:"CNC";position:absolute;right:5%;top:0;font-size:145px;font-weight:900;color:#2283db0d}.hero>*{position:relative;z-index:1}.welcome{font-size:20px;color:#b6d5f4}.hero h1{font-size:56px;margin:7px 0 13px;line-height:1}.hero p{font-size:19px;color:#d3e2f3;margin:0}.section{padding:19px;margin-bottom:15px}.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}.head h2{margin:0;font-size:20px}.head small{color:var(--muted)}.btn{border:1px solid #2699ff5c;background:#0b2b4edb;color:#eaf5ff;border-radius:10px;padding:9px 13px;cursor:pointer}.btn:hover{border-color:var(--blue);box-shadow:0 0 18px #007eff29}.primary{background:linear-gradient(100deg,#006cff,#0789ff);border-color:#42adff}.danger{border-color:#ff435055;background:#8e14202b}.small{padding:6px 9px;font-size:12px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:15px}.kpi{padding:17px;min-height:158px}.ki{width:50px;height:50px;border:1px solid currentColor;border-radius:50%;display:grid;place-items:center;font-size:23px;margin-bottom:11px}.kpi .lab{font-size:13px;color:#c4d3e6}.kpi .val{font-size:28px;font-weight:800;margin-top:4px;color:#fff}.kpi .sub{font-size:12px;color:#91a7c2;margin-top:2px}.line{height:6px;background:#fff1;border-radius:10px;margin-top:13px;overflow:hidden}.line i{display:block;height:100%;border-radius:10px;background:currentColor}.green{color:var(--green)}.blue{color:var(--blue)}.yellow{color:var(--yellow)}.purple{color:var(--purple)}.red{color:var(--red)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.activity{display:grid;gap:0}.act{display:grid;grid-template-columns:28px 1fr auto;gap:9px;padding:12px 0;border-bottom:1px solid #fff1}.act:last-child{border:0}.act small{display:block;color:#8198b2;margin-top:3px}.act time{font-size:11px;color:#7892ae}
+.bars{height:205px;display:flex;align-items:end;gap:10px;padding:10px 4px 0}.barcol{flex:1;height:100%;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:5px}.barcol i{display:block;width:min(38px,100%);border-radius:7px 7px 2px 2px;background:linear-gradient(#1597ff,#0753ad);box-shadow:0 0 13px #1597ff2b}.barcol span{font-size:10px;color:#7991ad}
+.machinegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.machine{padding:15px}.mhead{display:flex;justify-content:space-between;gap:8px}.machine h3{margin:0}.machine p{margin:4px 0;color:var(--muted);font-size:12px}.pill{border:1px solid currentColor;border-radius:20px;padding:4px 8px;font-size:10px;height:max-content}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:13px 0}.metric{background:#0a2540a8;border:1px solid #3d83ba26;border-radius:9px;padding:8px}.metric b{display:block;font-size:16px}.metric span{color:var(--muted);font-size:10px}.actions{display:flex;gap:6px;flex-wrap:wrap}
+.tablewrap{overflow:auto;border:1px solid #3d83ba28;border-radius:12px}.table{width:100%;border-collapse:collapse;min-width:650px}.table th,.table td{text-align:left;padding:11px 12px;border-bottom:1px solid #fff1;font-size:12px}.table th{background:#0a2440;color:#8eb1d5}.table td{color:#dce8f7}.table tr:last-child td{border:0}
+.progress{height:11px;background:#fff1;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#087eff,#00cfff)}
+.donut{width:145px;height:145px;border-radius:50%;background:conic-gradient(var(--blue) 0 62%,var(--green) 62% 82%,var(--yellow) 82% 92%,var(--purple) 92% 100%);display:grid;place-items:center;margin:auto}.donut:after{content:"78%";width:96px;height:96px;border-radius:50%;background:#061426;display:grid;place-items:center;font-size:23px;font-weight:800}.legend{display:grid;gap:7px;margin-top:14px}.legend span:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:7px}
+.alert{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid #fff1;border-radius:11px;background:#09223a73;margin:7px 0}.alert .aicon{font-size:21px}.alert h4{margin:0;font-size:13px}.alert p{margin:3px 0;color:var(--muted);font-size:11px}.alert small{color:#7892ae}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;color:#9db4ce;font-size:11px;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;background:#061729;border:1px solid #3b86bd3d;color:#fff;border-radius:9px;padding:10px;outline:0}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue)}.full{grid-column:1/-1}
+.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal.show{display:flex}.modalbox{width:min(650px,100%);padding:20px}.modalhead{display:flex;justify-content:space-between;align-items:center}.modalhead h2{margin:0}.close{background:0;border:0;color:#fff;font-size:26px;cursor:pointer}
+.toast{position:fixed;right:18px;bottom:18px;background:#071b31;border:1px solid var(--blue);border-radius:11px;padding:12px 15px;opacity:0;transform:translateY(12px);transition:.25s;z-index:100}.toast.show{opacity:1;transform:none}.mobile{display:none}.footer{text-align:center;color:#657f9e;font-size:11px;padding:9px}
+.search{display:flex;gap:8px}.search input{flex:1;background:#061729;border:1px solid #3b86bd3d;color:#fff;border-radius:10px;padding:10px}
+@media(max-width:1200px){.layout{grid-template-columns:210px 1fr}.machinegrid{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){.app{padding:8px}.top{height:64px;padding:7px 9px}.logo{height:47px}.status{display:none}.mobile{display:block}.layout{display:block}.sidebar{position:fixed;z-index:40;top:80px;bottom:8px;left:8px;width:240px;transform:translateX(-120%);transition:.25s;box-shadow:0 20px 60px #000}.sidebar.open{transform:none}.hero{min-height:200px;padding:28px 20px}.hero h1{font-size:42px}.hero p{font-size:16px}.grid2,.grid3,.grid4,.machinegrid{grid-template-columns:1fr}.form{grid-template-columns:1fr}.full{grid-column:auto}.section{padding:15px}.table{min-width:590px}}
+@media(max-width:500px){.kpis{grid-template-columns:1fr}.hero h1{font-size:36px}.head h2{font-size:17px}.act{grid-template-columns:25px 1fr}.act time{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top glass">
+<button class="icon mobile" onclick="toggleMenu()">☰</button>
+<img class="logo" src="logo.jpg" alt="American Engineering Inc.">
+<div class="topright"><div class="status"><span class="dot"></span><div><strong>Sistema Activo</strong><small>AEI Control</small></div></div><button class="icon" onclick="go('config')">⚙</button></div>
+</header>
+<div class="layout">
+<aside class="sidebar glass" id="sidebar">
+<nav class="nav">
+<button class="active" data-view="inicio" onclick="go('inicio',this)"><span class="ni">⌂</span>Inicio</button>
+<button data-view="produccion" onclick="go('produccion',this)"><span class="ni">▥</span>Producción</button>
+<button data-view="maquinas" onclick="go('maquinas',this)"><span class="ni">▣</span>Máquinas</button>
+<button data-view="ordenes" onclick="go('ordenes',this)"><span class="ni">◫</span>Órdenes</button>
+<button data-view="mantenimiento" onclick="go('mantenimiento',this)"><span class="ni">🔧</span>Mantenimiento</button>
+<button data-view="alertas" onclick="go('alertas',this)"><span class="ni">♧</span>Alertas <span class="badge" id="alertBadge">3</span></button>
+<button data-view="inventario" onclick="go('inventario',this)"><span class="ni">▤</span>Inventario</button>
+<button data-view="reportes" onclick="go('reportes',this)"><span class="ni">◴</span>Reportes</button>
+<button data-view="usuarios" onclick="go('usuarios',this)"><span class="ni">♙</span>Usuarios</button>
+<button data-view="config" onclick="go('config',this)"><span class="ni">⚙</span>Configuración</button>
+</nav>
+<div class="sidebar-bottom"><div class="gear"></div><div class="tag">Eficiencia • Control<br>Resultados</div></div>
+</aside>
+
+<main class="main">
+
+<section id="inicio" class="view active">
+<div class="hero glass"><div class="welcome">Bienvenido a</div><h1>AEI Control</h1><p>Monitorea, controla y optimiza tu producción<br>en tiempo real.</p></div>
+<div class="kpis">
+<div class="kpi card green"><div class="ki">▣</div><div class="lab">Máquinas activas</div><div class="val" id="kMachines">4 / 5</div><div class="sub">Disponibilidad 80%</div><div class="line"><i style="width:80%"></i></div></div>
+<div class="kpi card blue"><div class="ki">▥</div><div class="lab">Producción hoy</div><div class="val" id="kProduction">1,248</div><div class="sub">Piezas registradas</div><div class="line"><i style="width:78%"></i></div></div>
+<div class="kpi card yellow"><div class="ki">♧</div><div class="lab">Alertas pendientes</div><div class="val" id="kAlerts">3</div><div class="sub">Requieren atención</div><div class="line"><i style="width:35%"></i></div></div>
+<div class="kpi card purple"><div class="ki">◷</div><div class="lab">OEE</div><div class="val">86%</div><div class="sub">Objetivo 85%</div><div class="line"><i style="width:86%"></i></div></div>
+</div>
+<div class="grid2">
+<div class="section glass"><div class="head"><h2>Actividad reciente</h2><small>Automática</small></div><div id="homeActivity" class="activity"></div></div>
+<div class="section glass"><div class="head"><h2>Producción semanal</h2><small>Últimos 7 días</small></div><div id="homeChart" class="bars"></div></div>
+</div>
+</section>
+
+<section id="produccion" class="view">
+<div class="section glass"><div class="head"><div><h2>Producción</h2><small>Registra producción en pocos pasos</small></div><button class="btn primary" onclick="productionModal()">＋ Registrar producción</button></div>
+<div class="grid3"><div class="card" style="padding:17px"><small>Producción hoy</small><h2 id="prodToday">1,248</h2><div class="progress"><i style="width:78%"></i></div></div><div class="card" style="padding:17px"><small>Piezas buenas</small><h2 id="prodGood">1,217</h2><div class="progress"><i style="width:97.5%;background:linear-gradient(90deg,#00e58a,#00cfa0)"></i></div></div><div class="card" style="padding:17px"><small>Rechazadas</small><h2 id="prodBad">31</h2><div class="progress"><i style="width:9%;background:linear-gradient(90deg,#ffb020,#ff4350)"></i></div></div></div></div>
+<div class="grid2"><div class="section glass"><div class="head"><h2>Registro rápido</h2></div><button class="btn primary" style="width:100%;font-size:17px;padding:15px" onclick="productionModal()">＋ Registrar producción ahora</button><p style="color:var(--muted);font-size:12px">Máquina → lote → cantidad → buenas/rechazadas → confirmar. El sistema actualiza el historial automáticamente.</p></div>
+<div class="section glass"><div class="head"><h2>Meta del día</h2><small>1,600 piezas</small></div><div style="display:flex;align-items:center;gap:18px"><div class="donut"></div><div><h2 id="targetPct">78%</h2><small>avance</small></div></div></div></div>
+<div class="section glass"><div class="head"><h2>Últimos registros</h2><button class="btn" onclick="exportProduction()">Exportar CSV</button></div><div class="tablewrap"><table class="table"><thead><tr><th>Hora</th><th>Máquina</th><th>Lote</th><th>Total</th><th>Buenas</th><th>Rechazadas</th></tr></thead><tbody id="productionTable"></tbody></table></div></div>
+</section>
+
+<section id="maquinas" class="view">
+<div class="section glass"><div class="head"><div><h2>Máquinas CNC</h2><small>Estado, producción y alarmas</small></div><button class="btn primary" onclick="machineModal()">＋ Agregar máquina</button></div><div class="machinegrid" id="machineGrid"></div></div>
+<div class="section glass"><div class="head"><h2>Capacidad</h2></div><div class="grid3"><div><small>Disponibilidad</small><h2>92%</h2><div class="progress"><i style="width:92%"></i></div></div><div><small>Utilización</small><h2>78%</h2><div class="progress"><i style="width:78%"></i></div></div><div><small>Eficiencia</small><h2>86%</h2><div class="progress"><i style="width:86%"></i></div></div></div></div>
+</section>
+
+<section id="ordenes" class="view">
+<div class="section glass"><div class="head"><div><h2>Órdenes de trabajo</h2><small>Planificación sencilla</small></div><button class="btn primary" onclick="orderModal()">＋ Nueva orden</button></div><div class="tablewrap"><table class="table"><thead><tr><th>Orden</th><th>Cliente</th><th>Producto</th><th>Cantidad</th><th>Máquina</th><th>Fecha</th><th>Estado</th><th></th></tr></thead><tbody id="ordersTable"></tbody></table></div></div>
+</section>
+
+<section id="mantenimiento" class="view">
+<div class="section glass"><div class="head"><div><h2>Mantenimiento</h2><small>Preventivo y correctivo</small></div><button class="btn primary" onclick="maintenanceModal()">＋ Registrar mantenimiento</button></div><div class="grid3"><div class="card" style="padding:17px"><small>Próximos</small><h2 id="mntNext">2</h2></div><div class="card" style="padding:17px"><small>Vencidos</small><h2 id="mntOver" class="red">1</h2></div><div class="card" style="padding:17px"><small>Completados</small><h2>18</h2></div></div></div>
+<div class="section glass"><div class="head"><h2>Agenda</h2></div><div class="tablewrap"><table class="table"><thead><tr><th>Máquina</th><th>Tipo</th><th>Trabajo</th><th>Fecha</th><th>Estado</th><th></th></tr></thead><tbody id="maintenanceTable"></tbody></table></div></div>
+</section>
+
+<section id="alertas" class="view">
+<div class="section glass"><div class="head"><div><h2>Alertas</h2><small>Solo lo que requiere acción</small></div><button class="btn" onclick="clearAlerts()">Atender todas</button></div><div id="alertsList"></div></div>
+</section>
+
+<section id="inventario" class="view">
+<div class="section glass"><div class="head"><div><h2>Inventario</h2><small>Materiales y repuestos</small></div><button class="btn primary" onclick="inventoryModal()">＋ Agregar artículo</button></div><div class="search"><input id="inventorySearch" placeholder="Buscar artículo..." oninput="renderInventory()"></div><br><div class="tablewrap"><table class="table"><thead><tr><th>Artículo</th><th>Código</th><th>Categoría</th><th>Stock</th><th>Mínimo</th><th>Estado</th><th></th></tr></thead><tbody id="inventoryTable"></tbody></table></div></div>
+</section>
+
+<section id="reportes" class="view">
+<div class="section glass"><div class="head"><div><h2>Reportes</h2><small>Indicadores listos para consultar</small></div><button class="btn primary" onclick="exportAll()">Exportar datos</button></div>
+<div class="grid4"><div class="card" style="padding:15px"><small>OEE</small><h2>86%</h2></div><div class="card" style="padding:15px"><small>Calidad</small><h2>97.5%</h2></div><div class="card" style="padding:15px"><small>Disponibilidad</small><h2>92%</h2></div><div class="card" style="padding:15px"><small>Scrap</small><h2>2.5%</h2></div></div></div>
+<div class="grid2"><div class="section glass"><div class="head"><h2>Producción</h2></div><div id="reportChart" class="bars"></div></div><div class="section glass"><div class="head"><h2>Rendimiento</h2></div><div style="display:grid;gap:17px"><div>Disponibilidad <b style="float:right">92%</b><div class="progress"><i style="width:92%"></i></div></div><div>Performance <b style="float:right">89%</b><div class="progress"><i style="width:89%"></i></div></div><div>Calidad <b style="float:right">97.5%</b><div class="progress"><i style="width:97.5%"></i></div></div></div></div></div></div>
+</section>
+
+<section id="usuarios" class="view">
+<div class="section glass"><div class="head"><div><h2>Usuarios</h2><small>Acceso y responsabilidades</small></div><button class="btn primary" onclick="userModal()">＋ Agregar usuario</button></div><div class="tablewrap"><table class="table"><thead><tr><th>Nombre</th><th>Usuario</th><th>Rol</th><th>Estado</th><th></th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
+</section>
+
+<section id="config" class="view">
+<div class="section glass"><div class="head"><div><h2>Configuración</h2><small>Preferencias del sistema</small></div><button class="btn primary" onclick="saveSettings()">Guardar</button></div>
+<div class="form"><div class="field"><label>Empresa</label><input id="company" value="American Engineering Inc."></div><div class="field"><label>Sistema</label><input id="systemName" value="AEI Control"></div><div class="field"><label>Zona horaria</label><select id="timezone"><option>America/New_York</option><option>America/Chicago</option><option>America/Los_Angeles</option></select></div><div class="field"><label>Actualización</label><select id="refresh"><option>30 segundos</option><option>1 minuto</option><option>5 minutos</option></select></div><div class="field full"><label>Notas</label><textarea id="notes" rows="4" placeholder="Notas operativas..."></textarea></div></div></div>
+<div class="section glass"><div class="head"><h2>Datos</h2></div><button class="btn" onclick="backup()">Crear respaldo</button> <button class="btn" onclick="restoreFile()">Importar respaldo</button> <button class="btn danger" onclick="resetAll()">Restablecer demo</button><input id="fileRestore" type="file" accept=".json" hidden onchange="readBackup(event)"></div>
+</section>
+
+</main></div>
+<div class="footer">© 2026 American Engineering Inc. — AEI Control</div>
+</div>
+
+<div class="modal" id="modal"><div class="modalbox glass"><div class="modalhead"><h2 id="modalTitle"></h2><button class="close" onclick="closeModal()">×</button></div><div id="modalBody" style="margin-top:15px"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const DEMO={
+ machines:[
+ {id:1,name:"CNC-01",model:"Haas VF-2",status:"Operativa",hours:"8.4 h",pieces:412,temp:"68°C",alarm:"Sin alarmas"},
+ {id:2,name:"CNC-02",model:"Haas VF-3",status:"Operativa",hours:"7.2 h",pieces:386,temp:"71°C",alarm:"Sin alarmas"},
+ {id:3,name:"CNC-03",model:"Haas ST-20",status:"Advertencia",hours:"2.1 h",pieces:218,temp:"86°C",alarm:"Temperatura alta"},
+ {id:4,name:"CNC-04",model:"Haas VF-4",status:"Operativa",hours:"0.9 h",pieces:232,temp:"67°C",alarm:"Sin alarmas"},
+ {id:5,name:"CNC-05",model:"Haas Mini Mill",status:"Detenida",hours:"0 h",pieces:0,temp:"24°C",alarm:"Mantenimiento"}
+ ],
+ productions:[
+ {time:"10:42 AM",machine:"CNC-02",lot:"#4587",total:386,good:382,bad:4},
+ {time:"09:55 AM",machine:"CNC-01",lot:"#4586",total:412,good:407,bad:5},
+ {time:"09:20 AM",machine:"CNC-04",lot:"#4585",total:232,good:228,bad:4},
+ {time:"08:40 AM",machine:"CNC-03",lot:"#4584",total:218,good:200,bad:18}
+ ],
+ orders:[
+ {id:"OT-1001",client:"Cliente A",product:"Pieza A-204",qty:500,machine:"CNC-02",date:"2026-08-21",status:"En proceso"},
+ {id:"OT-1002",client:"Cliente B",product:"Pieza B-118",qty:300,machine:"CNC-01",date:"2026-08-22",status:"Programada"},
+ {id:"OT-1003",client:"Cliente C",product:"Pieza C-330",qty:750,machine:"CNC-04",date:"2026-08-23",status:"Programada"}
+ ],
+ maintenance:[
+ {id:1,machine:"CNC-05",type:"Preventivo",work:"Lubricación y revisión",date:"2026-08-21",status:"Vencido"},
+ {id:2,machine:"CNC-03",type:"Correctivo",work:"Revisar refrigeración",date:"2026-08-22",status:"Pendiente"},
+ {id:3,machine:"CNC-01",type:"Preventivo",work:"Cambio de filtros",date:"2026-08-25",status:"Programado"}
+ ],
+ alerts:[
+ {id:1,type:"warning",title:"CNC-03 — Temperatura alta",desc:"Temperatura actual 86°C. Revisar refrigeración.",time:"09:17 AM"},
+ {id:2,type:"danger",title:"CNC-05 — Mantenimiento",desc:"Mantenimiento preventivo pendiente.",time:"08:40 AM"},
+ {id:3,type:"info",title:"Producción — Meta diaria",desc:"Se alcanzó el 78% de la meta.",time:"07:32 AM"}
+ ],
+ inventory:[
+ {id:1,name:"Inserto de corte",code:"INS-001",cat:"Herramientas",stock:42,min:20},
+ {id:2,name:"Refrigerante",code:"REF-010",cat:"Consumibles",stock:18,min:25},
+ {id:3,name:"Filtro hidráulico",code:"FIL-003",cat:"Repuestos",stock:7,min:5},
+ {id:4,name:"Aceite de husillo",code:"ACE-020",cat:"Lubricantes",stock:12,min:10}
+ ],
+ users:[
+ {id:1,name:"Administrador",user:"admin",role:"Administrador",status:"Activo"},
+ {id:2,name:"Supervisor",user:"supervisor",role:"Supervisor",status:"Activo"},
+ {id:3,name:"Operador",user:"operador",role:"Operador",status:"Activo"}
+ ]
+};
+let data=JSON.parse(localStorage.getItem("aeiComplete")||"null")||structuredClone(DEMO);
+function save(){localStorage.setItem("aeiComplete",JSON.stringify(data))}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(window.__t);window.__t=setTimeout(()=>t.classList.remove("show"),1900)}
+function toggleMenu(){document.getElementById("sidebar").classList.toggle("open")}
+function go(id,btn){
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById(id).classList.add("active");
+ if(btn){document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}
+ render();if(innerWidth<=800)document.getElementById("sidebar").classList.remove("open")
+}
+function openModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")closeModal()}
+function machineClass(s){return s==="Operativa"?"green":s==="Advertencia"?"yellow":"red"}
+function renderMachines(){
+ const g=document.getElementById("machineGrid");if(!g)return;g.innerHTML="";
+ data.machines.forEach(m=>{const d=document.createElement("div");d.className="machine card";d.innerHTML=`<div class="mhead"><div><h3>${m.name}</h3><p>${m.model}</p></div><span class="pill ${machineClass(m.status)}">${m.status}</span></div><div class="metrics"><div class="metric"><b>${m.hours}</b><span>Operación</span></div><div class="metric"><b>${m.pieces}</b><span>Piezas</span></div><div class="metric"><b>${m.temp}</b><span>Temperatura</span></div><div class="metric"><b>${m.alarm}</b><span>Estado</span></div></div><div class="actions"><button class="btn small" onclick="machineDetail(${m.id})">Detalle</button><button class="btn small" onclick="machineModal(${m.id})">Editar</button></div>`;g.appendChild(d)})
+ const active=data.machines.filter(m=>m.status==="Operativa").length;document.getElementById("kMachines").textContent=`${active} / ${data.machines.length}`
+}
+function machineDetail(id){const m=data.machines.find(x=>x.id===id);openModal("Detalle — "+m.name,`<div class="grid2"><div><small>Modelo</small><h3>${m.model}</h3></div><div><small>Estado</small><h3>${m.status}</h3></div><div><small>Horas</small><h3>${m.hours}</h3></div><div><small>Piezas</small><h3>${m.pieces}</h3></div><div><small>Temperatura</small><h3>${m.temp}</h3></div><div><small>Alarma</small><h3>${m.alarm}</h3></div></div>`)}
+function machineModal(id=0){
+ const m=data.machines.find(x=>x.id===id)||{};
+ openModal(id?"Editar máquina":"Agregar máquina",`<div class="form"><div class="field"><label>Nombre</label><input id="mn" value="${m.name||"CNC-06"}"></div><div class="field"><label>Modelo</label><input id="mm" value="${m.model||"Haas"}"></div><div class="field"><label>Estado</label><select id="ms"><option ${m.status==="Operativa"?"selected":""}>Operativa</option><option ${m.status==="Advertencia"?"selected":""}>Advertencia</option><option ${m.status==="Detenida"?"selected":""}>Detenida</option></select></div><div class="field"><label>Horas</label><input id="mh" value="${m.hours||"0 h"}"></div><div class="field"><label>Piezas</label><input id="mp" type="number" value="${m.pieces||0}"></div><div class="field"><label>Temperatura</label><input id="mt" value="${m.temp||"25°C"}"></div></div><button class="btn primary" style="margin-top:14px;width:100%" onclick="saveMachine(${id})">Guardar</button>`)
+}
+function saveMachine(id){const m={id:id||Date.now(),name:mn.value.trim()||"CNC",model:mm.value.trim()||"Haas",status:ms.value,hours:mh.value,pieces:Number(mp.value)||0,temp:mt.value,alarm:ms.value==="Operativa"?"Sin alarmas":"Revisar"};data.machines=id?data.machines.map(x=>x.id===id?m:x):[...data.machines,m];save();closeModal();render();toast("Máquina guardada")}
+function productionModal(){
+ openModal("Registrar producción",`<div class="form"><div class="field"><label>Máquina</label><select id="pm">${data.machines.map(m=>`<option>${m.name}</option>`).join("")}</select></div><div class="field"><label>Orden / Lote</label><input id="pl" placeholder="#4588"></div><div class="field"><label>Total</label><input id="pt" type="number" min="1" value="100"></div><div class="field"><label>Buenas</label><input id="pg" type="number" min="0" value="100"></div><div class="field"><label>Rechazadas</label><input id="pb" type="number" min="0" value="0"></div><div class="field"><label>Nota</label><input id="pn" placeholder="Opcional"></div></div><button class="btn primary" style="margin-top:14px;width:100%" onclick="saveProduction()">✓ Confirmar producción</button>`)
+}
+function saveProduction(){let machine=pm.value,lot=pl.value.trim()||("#"+(4588+data.productions.length)),total=+pt.value||0,good=+pg.value||0,bad=+pb.value||0;if(total<1||good<0||bad<0||good+bad!==total){toast("Revisa: buenas + rechazadas debe ser igual al total");return}data.productions.unshift({time:new Date().toLocaleTimeString("es-US",{hour:"2-digit",minute:"2-digit"}),machine,lot,total,good,bad,note:pn.value});let m=data.machines.find(x=>x.name===machine);if(m)m.pieces+=total;save();closeModal();render();toast("Producción registrada")}
+function renderProduction(){const t=document.getElementById("productionTable");if(!t)return;t.innerHTML=data.productions.slice(0,12).map(p=>`<tr><td>${p.time}</td><td>${p.machine}</td><td>${p.lot}</td><td>${p.total}</td><td class="green">${p.good}</td><td class="yellow">${p.bad}</td></tr>`).join("");const total=data.productions.reduce((s,p)=>s+p.total,0),good=data.productions.reduce((s,p)=>s+p.good,0),bad=data.productions.reduce((s,p)=>s+p.bad,0);document.getElementById("prodToday").textContent=(1248+Math.max(0,total-1248)).toLocaleString();document.getElementById("prodGood").textContent=good.toLocaleString();document.getElementById("prodBad").textContent=bad.toLocaleString();document.getElementById("kProduction").textContent=(1248+Math.max(0,total-1248)).toLocaleString()}
+function orderModal(){openModal("Nueva orden",`<div class="form"><div class="field"><label>Cliente</label><input id="oc"></div><div class="field"><label>Producto</label><input id="op"></div><div class="field"><label>Cantidad</label><input id="oq" type="number" value="100"></div><div class="field"><label>Máquina</label><select id="om">${data.machines.map(m=>`<option>${m.name}</option>`).join("")}</select></div><div class="field"><label>Fecha</label><input id="od" type="date" value="${new Date().toISOString().slice(0,10)}"></div></div><button class="btn primary" style="margin-top:14px;width:100%" onclick="saveOrder()">Crear orden</button>`)}
+function saveOrder(){data.orders.push({id:"OT-"+(1001+data.orders.length),client:oc.value,product:op.value,qty:+oq.value||0,machine:om.value,date:od.value,status:"Programada"});save();closeModal();render();toast("Orden creada")}
+function renderOrders(){const t=document.getElementById("ordersTable");if(!t)return;t.innerHTML=data.orders.map(o=>`<tr><td>${o.id}</td><td>${o.client}</td><td>${o.product}</td><td>${o.qty}</td><td>${o.machine}</td><td>${o.date}</td><td>${o.status}</td><td><button class="btn small" onclick="advanceOrder('${o.id}')">Avanzar</button></td></tr>`).join("")}
+function advanceOrder(id){const o=data.orders.find(x=>x.id===id);if(!o)return;o.status=o.status==="Programada"?"En proceso":o.status==="En proceso"?"Completada":"Completada";save();render();toast("Orden actualizada")}
+function maintenanceModal(){openModal("Registrar mantenimiento",`<div class="form"><div class="field"><label>Máquina</label><select id="mc">${data.machines.map(m=>`<option>${m.name}</option>`).join("")}</select></div><div class="field"><label>Tipo</label><select id="mct"><option>Preventivo</option><option>Correctivo</option></select></div><div class="field full"><label>Trabajo</label><input id="mw"></div><div class="field"><label>Fecha</label><input id="md" type="date" value="${new Date().toISOString().slice(0,10)}"></div></div><button class="btn primary" style="margin-top:14px;width:100%" onclick="saveMaintenance()">Guardar</button>`)}
+function saveMaintenance(){data.maintenance.push({id:Date.now(),machine:mc.value,type:mct.value,work:mw.value,date:md.value,status:"Pendiente"});save();closeModal();render();toast("Mantenimiento registrado")}
+function renderMaintenance(){const t=document.getElementById("maintenanceTable");if(!t)return;t.innerHTML=data.maintenance.map(x=>`<tr><td>${x.machine}</td><td>${x.type}</td><td>${x.work}</td><td>${x.date}</td><td>${x.status}</td><td><button class="btn small" onclick="completeMaintenance(${x.id})">Completar</button></td></tr>`).join("");document.getElementById("mntNext").textContent=data.maintenance.filter(x=>x.status==="Pendiente"||x.status==="Programado").length}
+function completeMaintenance(id){const x=data.maintenance.find(v=>v.id===id);if(x)x.status="Completado";save();render();toast("Mantenimiento completado")}
+function renderAlerts(){const b=document.getElementById("alertsList");if(!b)return;b.innerHTML=data.alerts.map(a=>`<div class="alert"><div class="aicon">${a.type==="danger"?"⛔":a.type==="warning"?"⚠":"ℹ"}</div><div style="flex:1"><h4>${a.title}</h4><p>${a.desc}</p><small>${a.time}</small></div><button class="btn small" onclick="dismissAlert(${a.id})">Atender</button></div>`).join("");document.getElementById("alertBadge").textContent=data.alerts.length;document.getElementById("kAlerts").textContent=data.alerts.length}
+function dismissAlert(id){data.alerts=data.alerts.filter(a=>a.id!==id);save();render();toast("Alerta atendida")}
+function clearAlerts(){data.alerts=[];save();render();toast("Alertas atendidas")}
+function inventoryModal(){openModal("Agregar artículo",`<div class="form"><div class="field"><label>Artículo</label><input id="in"></div><div class="field"><label>Código</label><input id="ic"></div><div class="field"><label>Categoría</label><input id="ix"></div><div class="field"><label>Stock</label><input id="is" type="number" value="0"></div><div class="field"><label>Mínimo</label><input id="im" type="number" value="5"></div></div><button class="btn primary" style="margin-top:14px;width:100%" onclick="saveInventory()">Guardar</button>`)}
+function saveInventory(){data.inventory.push({id:Date.now(),name:in.value,code:ic.value,cat:ix.value,stock:+is.value||0,min:+im.value||0});save();closeModal();render();toast("Artículo agregado")}
+function renderInventory(){const t=document.getElementById("inventoryTable");if(!t)return;const q=(document.getElementById("inventorySearch")?.value||"").toLowerCase();t.innerHTML=data.inventory.filter(x=>(x.name+x.code+x.cat).toLowerCase().includes(q)).map(x=>`<tr><td>${x.name}</td><td>${x.code}</td><td>${x.cat}</td><td>${x.stock}</td><td>${x.min}</td><td class="${x.stock<=x.min?"yellow":"green"}">${x.stock<=x.min?"Bajo":"OK"}</td><td><button class="btn small" onclick="adjustStock(${x.id})">Ajustar</button></td></tr>`).join("")}
+function adjustStock(id){const x=data.inventory.find(v=>v.id===id);const n=prompt("Nuevo stock:",x.stock);if(n!==null&&!isNaN(+n)){x.stock=+n;save();render();toast("Stock actualizado")}}
+function userModal(){openModal("Agregar usuario",`<div class="form"><div class="field"><label>Nombre</label><input id="un"></div><div class="field"><label>Usuario</label><input id="uu"></div><div class="field"><label>Rol</label><select id="ur"><option>Administrador</option><option>Supervisor</option><option>Operador</option><option>Solo lectura</option></select></div></div><button class="btn primary" style="margin-top:14px;width:100%" onclick="saveUser()">Guardar</button>`)}
+function saveUser(){data.users.push({id:Date.now(),name:un.value,user:uu.value,role:ur.value,status:"Activo"});save();closeModal();render();toast("Usuario creado")}
+function renderUsers(){const t=document.getElementById("usersTable");if(!t)return;t.innerHTML=data.users.map(u=>`<tr><td>${u.name}</td><td>${u.user}</td><td>${u.role}</td><td class="green">${u.status}</td><td><button class="btn small" onclick="toggleUser(${u.id})">Cambiar estado</button></td></tr>`).join("")}
+function toggleUser(id){const u=data.users.find(x=>x.id===id);u.status=u.status==="Activo"?"Inactivo":"Activo";save();render();toast("Usuario actualizado")}
+function renderHome(){const a=document.getElementById("homeActivity");if(!a)return;const rows=[["●","CNC-02","Producción completada — Lote #4587","10:42 AM"],["⚠","CNC-03","Alerta de temperatura alta","09:17 AM"],["✓","CNC-01","Reanudó operación","08:55 AM"],["▥","Producción","Meta diaria al 78%","07:32 AM"]];a.innerHTML=rows.map(r=>`<div class="act"><b>${r[0]}</b><div><b>${r[1]}</b><small>${r[2]}</small></div><time>${r[3]}</time></div>`).join("")}
+function bars(id,vals,labels){const e=document.getElementById(id);if(!e)return;e.innerHTML="";const max=Math.max(...vals);vals.forEach((v,i)=>{const d=document.createElement("div");d.className="barcol";d.innerHTML=`<i style="height:${Math.max(10,v/max*82)}%"></i><span>${labels[i]}</span>`;e.appendChild(d)})}
+function renderCharts(){bars("homeChart",[62,71,58,82,76,90,78],["L","M","X","J","V","S","D"]);bars("reportChart",[55,62,70,66,78,81,86,90],["E","F","M","A","M","J","J","A"])}
+function saveSettings(){localStorage.setItem("aeiSettings",JSON.stringify({company:company.value,system:systemName.value,timezone:timezone.value,refresh:refresh.value,notes:notes.value}));toast("Configuración guardada")}
+function backup(){const blob=new Blob([JSON.stringify({data,settings:JSON.parse(localStorage.getItem("aeiSettings")||"{}")},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="aei-control-respaldo.json";a.click();URL.revokeObjectURL(a.href);toast("Respaldo creado")}
+function restoreFile(){document.getElementById("fileRestore").click()}
+function readBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(o.data){data=o.data;save();render();toast("Respaldo importado")}else toast("Archivo no válido")}catch{toast("No se pudo importar")}};r.readAsText(f)}
+function resetAll(){if(confirm("¿Restablecer todos los datos de demostración?")){data=structuredClone(DEMO);save();render();toast("Datos restablecidos")}}
+function exportProduction(){const rows=[["Hora","Máquina","Lote","Total","Buenas","Rechazadas"],...data.productions.map(p=>[p.time,p.machine,p.lot,p.total,p.good,p.bad])];downloadCSV(rows,"aei-produccion.csv")}
+function exportAll(){const rows=[["Máquina","Estado","Piezas","Horas","Temperatura"],...data.machines.map(m=>[m.name,m.status,m.pieces,m.hours,m.temp])];downloadCSV(rows,"aei-resumen.csv")}
+function downloadCSV(rows,name){const csv=rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download=name;a.click();URL.revokeObjectURL(a.href);toast("Archivo exportado")}
+function render(){renderMachines();renderProduction();renderOrders();renderMaintenance();renderAlerts();renderInventory();renderUsers();renderHome();renderCharts()}
+render();
+</script>
+</body>
+</html>
