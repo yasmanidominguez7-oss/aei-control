@@ -2,174 +2,180 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#020711">
 <meta name="description" content="AEI Control — American Engineering Inc.">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="logo.jpg" type="image/jpeg">
+<link rel="icon" href="logo.jpg">
 <title>AEI Control — American Engineering Inc.</title>
 <style>
-:root{
- --bg:#020711;--panel:rgba(7,19,35,.78);--panel2:rgba(8,28,52,.72);
- --line:rgba(62,157,255,.38);--blue:#1597ff;--green:#00e58a;
- --orange:#ffae19;--purple:#8d4dff;--red:#ff3038;
- --text:#f4f8ff;--muted:#91a7c2
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg)}
-body{
- overflow-x:hidden;
- background:radial-gradient(circle at 48% 8%,rgba(0,111,255,.18),transparent 31%),
- linear-gradient(145deg,#02050b 0%,#03101e 52%,#02060d 100%)
-}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;
- background-image:linear-gradient(rgba(52,129,207,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(52,129,207,.07) 1px,transparent 1px);
- background-size:42px 42px}
-.app{min-height:100vh;padding:18px}
-.glass,.card{
- background:linear-gradient(145deg,rgba(12,31,54,.82),rgba(3,12,24,.76));
- border:1px solid var(--line);border-radius:18px;
- box-shadow:0 20px 60px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.035);
- backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
-}
-.topbar{height:82px;display:flex;align-items:center;justify-content:space-between;padding:9px 18px;margin-bottom:16px}
-.logo{height:64px;width:auto;max-width:340px;object-fit:contain}
-.status-area{display:flex;align-items:center;gap:12px}
-.status{display:flex;align-items:center;gap:10px;padding:10px 18px;border-left:1px solid #ffffff18;border-right:1px solid #ffffff18}
-.dot{width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 15px var(--green)}
-.status strong{display:block}.status small{display:block;color:#9db0c9;margin-top:3px}
-.icon-btn{width:50px;height:50px;border:1px solid #3499ff40;border-radius:14px;background:#081b30a8;color:white;font-size:22px;cursor:pointer}
-.icon-btn:hover{border-color:var(--blue);box-shadow:0 0 24px #007eff38}
-.layout{display:grid;grid-template-columns:255px minmax(0,1fr) 325px;gap:18px}
-.sidebar{min-height:calc(100vh - 134px);padding:10px;display:flex;flex-direction:column}
-.nav{display:flex;flex-direction:column;gap:7px}
-.nav button{display:flex;align-items:center;gap:17px;height:62px;border:1px solid transparent;border-radius:14px;background:transparent;color:#d9e6f8;padding:0 19px;font-size:18px;cursor:pointer}
-.nav button:hover{background:#10447847;border-color:#2891ff3d}
-.nav button.active{background:linear-gradient(100deg,#0066ff8c,#0a418260);border-color:#159cff;box-shadow:0 0 26px #0075ff2e}
-.ico{width:27px;text-align:center;font-size:25px}
-.badge{margin-left:auto;background:var(--red);color:#fff;border-radius:50%;min-width:29px;height:29px;display:grid;place-items:center;font-size:13px;font-weight:700}
-.sidebar-bottom{margin-top:auto;min-height:210px;border-radius:16px;padding:18px;display:flex;align-items:flex-end;justify-content:center;text-align:center;color:#9ec5ee;position:relative;overflow:hidden}
-.gear{position:absolute;width:190px;height:190px;border:28px dotted #075be1;border-radius:50%;left:-35px;bottom:-75px;opacity:.7;transform:rotate(12deg)}
-.gear:after{content:"";position:absolute;inset:35px;border:25px solid #063d99;border-radius:50%;background:#031024}
-.tagline{position:relative;z-index:1;line-height:1.7;font-size:16px}
-.hero{min-height:263px;position:relative;overflow:hidden;padding:44px 30px;margin-bottom:18px}
-.hero:before{content:"";position:absolute;inset:0;background:
- radial-gradient(circle at 76% 55%,#199cff38,transparent 24%),
- linear-gradient(90deg,#030e1cf7 0%,#030e1cc2 43%,#030e1c2e 100%)}
-.hero:after{content:"CNC";position:absolute;right:4%;top:10%;font-size:150px;font-weight:900;letter-spacing:-12px;color:#2283db0e;transform:skew(-8deg)}
-.hero-content{position:relative;z-index:2;max-width:610px}
-.welcome{font-size:23px;color:#b6d5f4;margin-bottom:8px}
-.hero h1{font-size:61px;line-height:1;margin:0 0 18px;font-weight:800;letter-spacing:-2px}
-.hero p{font-size:22px;line-height:1.4;color:#d3e2f3;margin:0}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
-.kpi{padding:20px 21px;min-height:198px;position:relative;overflow:hidden}
-.kpi:after{content:"";position:absolute;left:22px;right:22px;bottom:21px;height:8px;border-radius:10px;background:#4489ce40}
-.progress{position:absolute;left:22px;bottom:21px;height:8px;border-radius:10px}
-.kpi-icon{width:59px;height:59px;border-radius:50%;display:grid;place-items:center;font-size:28px;margin-bottom:16px;border:1px solid currentColor;box-shadow:0 0 24px currentColor}
-.green .kpi-icon{color:#00e58a;background:#00e58a21}.green .progress{background:#00e58a;width:82%}
-.blue .kpi-icon{color:#178fff;background:#178fff21}.blue .progress{background:#178fff;width:75%}
-.orange .kpi-icon{color:#ffad16;background:#ffad1621}.orange .progress{background:#ffad16;width:90%}
-.purple .kpi-icon{color:#9a5cff;background:#9a5cff21}.purple .progress{background:#9a5cff;width:78%}
-.kpi-label{font-size:16px;color:#c4d3e6}.kpi-value{font-size:30px;font-weight:800;margin-top:7px}.kpi-sub{font-size:14px;color:#b4c7df;margin-top:2px}
-.activity{padding:20px 24px}
-.section-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #73a3cf29;padding-bottom:14px;margin-bottom:4px}
-.section-head h2{font-size:20px;margin:0}.section-head a{color:#23a0ff;text-decoration:none;font-size:14px}
-.activity-row{display:grid;grid-template-columns:18px 42px 1fr auto;align-items:center;gap:13px;min-height:62px;border-bottom:1px solid #73a3cf1f}
-.activity-row:last-child{border-bottom:0}
-.state-dot{width:13px;height:13px;border-radius:50%;box-shadow:0 0 13px currentColor}
-.ok{color:#00df7e;background:#00df7e}.warn{color:#ffad16;background:#ffad16}.info{color:#168fff;background:#168fff}
-.event-icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#154b8266;border:1px solid #5ba6ef38;font-size:19px}
-.event-title{font-size:15px}.event-sub{font-size:13px;color:#8ea5c1;margin-top:3px}.event-time{font-size:14px;color:#a9bed8}
-.side{display:flex;flex-direction:column;gap:18px}
-.quick,.system,.quote{padding:20px}
-.side h2{font-size:19px;margin:0 0 15px}
-.quick-item{height:56px;display:flex;align-items:center;gap:13px;padding:0 14px;margin:9px 0;border:1px solid #539bdc3b;background:#13345673;border-radius:13px;cursor:pointer}
-.quick-item:hover{border-color:#188fff;box-shadow:0 0 20px #0082ff24}
-.quick-item span:last-child{margin-left:auto;color:#9bb8d6;font-size:25px}
-.system-head{display:flex;align-items:center;justify-content:space-between}
-.online{color:#00e58a;background:#00e58a12;border:1px solid #00e58a2b;padding:8px 12px;border-radius:20px;font-size:14px}
-.sys-row{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-top:1px solid #73a3cf21;color:#bfd0e5}
-.sys-ok{color:#00e58a}.sys-ok:before{content:"";display:inline-block;width:11px;height:11px;background:#00e58a;border-radius:50%;margin-right:9px;box-shadow:0 0 12px #00e58a}
-.quote{min-height:185px;display:flex;align-items:center;position:relative;overflow:hidden}
-.quote p{font-size:18px;line-height:1.5;color:#d8e6f5;max-width:230px;margin:0}.quote:after{content:"⚙";position:absolute;right:-18px;bottom:-45px;font-size:145px;color:#0054dc6b;transform:rotate(14deg)}
-.footer{text-align:center;color:#6f87a5;font-size:13px;padding:14px 0 2px}
-.mobile-menu{display:none}
-.toast{position:fixed;right:22px;bottom:22px;padding:13px 18px;background:#071b31;border:1px solid #168fff;border-radius:12px;box-shadow:0 10px 35px #0008;opacity:0;transform:translateY(15px);transition:.25s;z-index:20}
-.toast.show{opacity:1;transform:none}
-@media(max-width:1200px){.layout{grid-template-columns:220px minmax(0,1fr)}.side{grid-column:2;display:grid;grid-template-columns:1fr 1fr}.quote{grid-column:span 2}.kpis{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:800px){
- .app{padding:10px}.topbar{height:68px;padding:7px 10px}.logo{height:49px}.status{display:none}
- .layout{display:block}.sidebar{position:fixed;z-index:15;left:10px;top:88px;bottom:10px;width:245px;transform:translateX(-120%);transition:.25s;box-shadow:0 20px 60px #000}
- .sidebar.open{transform:none}.mobile-menu{display:block}
- .hero{min-height:245px;padding:30px 22px}.hero h1{font-size:43px}.hero p{font-size:17px}.welcome{font-size:18px}
- .kpis{grid-template-columns:1fr 1fr}.kpi{min-height:175px}.kpi-value{font-size:26px}
-}
-@media(max-width:520px){.kpis{grid-template-columns:1fr}.hero h1{font-size:38px}.hero:after{font-size:90px}.activity-row{grid-template-columns:12px 38px 1fr}.event-time{display:none}}
+:root{--bg:#020711;--p:#07182bdb;--p2:#0a2340cc;--line:#2699ff66;--blue:#1597ff;--green:#00e58a;--orange:#ffae19;--red:#ff3b46;--purple:#995cff;--text:#f4f8ff;--muted:#91a7c2}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text);background:#020711}body{overflow-x:hidden;background:radial-gradient(circle at 50% 0,#006fff2b,transparent 34%),linear-gradient(145deg,#02050b,#03101e 55%,#02060d)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(#3481cf12 1px,transparent 1px),linear-gradient(90deg,#3481cf12 1px,transparent 1px);background-size:42px 42px}
+button,input,select{font:inherit}.app{min-height:100vh;padding:16px}.glass,.card{background:linear-gradient(145deg,#0c1f36c7,#030c18c9);border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 55px #0007,inset 0 1px #ffffff09;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.topbar{height:80px;display:flex;align-items:center;justify-content:space-between;padding:8px 18px;margin-bottom:16px}.logo{height:62px;width:auto;max-width:340px;object-fit:contain}.topright{display:flex;align-items:center;gap:10px}.status{display:flex;gap:9px;align-items:center;padding:10px 16px;border-left:1px solid #fff1;border-right:1px solid #fff1}.dot{width:11px;height:11px;background:var(--green);border-radius:50%;box-shadow:0 0 14px var(--green)}.status small{display:block;color:var(--muted);margin-top:2px}.iconbtn{width:48px;height:48px;border:1px solid #2699ff4a;border-radius:13px;background:#081b30a8;color:#fff;cursor:pointer}.iconbtn:hover{border-color:var(--blue);box-shadow:0 0 22px #007eff38}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:16px}.sidebar{min-height:calc(100vh - 128px);padding:10px;display:flex;flex-direction:column}.nav{display:flex;flex-direction:column;gap:6px}.nav button{height:58px;border:1px solid transparent;border-radius:13px;background:transparent;color:#dce9f9;text-align:left;padding:0 17px;display:flex;align-items:center;gap:15px;cursor:pointer;font-size:17px}.nav button:hover{background:#10447842;border-color:#2891ff35}.nav button.active{background:linear-gradient(100deg,#0066ff8a,#0a41825c);border-color:#159cff;box-shadow:0 0 25px #0075ff24}.ico{width:25px;text-align:center;font-size:22px}.badge{margin-left:auto;background:var(--red);border-radius:50%;min-width:27px;height:27px;display:grid;place-items:center;font-size:12px}.sidebar-bottom{margin-top:auto;min-height:195px;position:relative;overflow:hidden;display:grid;place-items:end center;text-align:center;padding:18px;color:#9ec5ee}.gear{position:absolute;width:190px;height:190px;border:28px dotted #075be1;border-radius:50%;left:-40px;bottom:-80px;opacity:.7}.gear:after{content:"";position:absolute;inset:34px;border:24px solid #063d99;border-radius:50%;background:#031024}.tagline{z-index:1;line-height:1.7}
+.main{min-width:0}.view{display:none}.view.active{display:block}.hero{min-height:225px;padding:36px 30px;position:relative;overflow:hidden;margin-bottom:16px}.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 55%,#199cff3b,transparent 24%),linear-gradient(90deg,#030e1cf8,#030e1cbb 46%,#030e1c2e)}.hero:after{content:"CNC";position:absolute;right:5%;top:4%;font-size:145px;font-weight:900;color:#2283db0c}.hero>*{position:relative;z-index:1}.welcome{font-size:21px;color:#b6d5f4}.hero h1{font-size:55px;line-height:1;margin:8px 0 14px}.hero p{font-size:20px;color:#d3e2f3;margin:0}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:16px}.kpi{padding:18px;min-height:165px}.kicon{width:53px;height:53px;border-radius:50%;display:grid;place-items:center;font-size:25px;border:1px solid currentColor;margin-bottom:13px}.green{color:var(--green)}.blue{color:var(--blue)}.orange{color:var(--orange)}.purple{color:var(--purple)}.kpi .label{color:#c4d3e6;font-size:14px}.kpi .value{font-size:29px;font-weight:800;color:#fff;margin-top:5px}.kpi .sub{font-size:13px;color:#a9bfd8;margin-top:2px}.bar{height:6px;background:#fff1;border-radius:10px;margin-top:15px;overflow:hidden}.bar i{display:block;height:100%;border-radius:10px;background:currentColor}
+.section{padding:20px;margin-bottom:16px}.sectionhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.sectionhead h2{margin:0;font-size:20px}.sectionhead small{color:var(--muted)}.btn{border:1px solid #2699ff66;background:#0b2b4ed9;color:#eaf5ff;border-radius:11px;padding:10px 14px;cursor:pointer}.btn:hover{border-color:var(--blue);box-shadow:0 0 18px #007eff29}.btn.primary{background:linear-gradient(100deg,#006cff,#0789ff);border-color:#42adff}.btn.danger{background:#8e14202b;border-color:#ff4a554d}.btn.small{padding:7px 10px;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.machinegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.machine{padding:16px;position:relative}.machine .mhead{display:flex;justify-content:space-between;align-items:start}.machine h3{margin:0;font-size:18px}.machine p{margin:5px 0;color:var(--muted);font-size:13px}.pill{padding:5px 9px;border-radius:20px;font-size:11px;border:1px solid currentColor}.machine .metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.metric{background:#0a2540a6;border:1px solid #3d83ba25;border-radius:10px;padding:9px}.metric b{display:block;font-size:17px}.metric span{color:var(--muted);font-size:11px}.actions{display:flex;gap:7px;flex-wrap:wrap}
+.tablewrap{overflow:auto;border:1px solid #3d83ba26;border-radius:13px}.table{width:100%;border-collapse:collapse;min-width:650px}.table th,.table td{text-align:left;padding:12px 13px;border-bottom:1px solid #ffffff12;font-size:13px}.table th{color:#8eb1d5;background:#0a2440}.table tr:last-child td{border-bottom:0}.table td{color:#dce8f7}
+.progressbar{height:12px;background:#ffffff12;border-radius:20px;overflow:hidden}.progressbar i{display:block;height:100%;background:linear-gradient(90deg,#087eff,#00cfff);border-radius:20px}.chart{height:210px;display:flex;align-items:end;gap:10px;padding:15px 4px 0}.col{flex:1;min-width:20px;display:flex;flex-direction:column;align-items:center;justify-content:end;height:100%;gap:5px}.col i{display:block;width:100%;max-width:38px;border-radius:7px 7px 2px 2px;background:linear-gradient(#1597ff,#0753ad);box-shadow:0 0 13px #1597ff30}.col span{font-size:10px;color:#7991ad}.donut{width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--blue) 0 62%,var(--green) 62% 82%,var(--orange) 82% 92%,var(--purple) 92% 100%);display:grid;place-items:center;margin:auto}.donut:after{content:"78%";width:100px;height:100px;border-radius:50%;background:#061426;display:grid;place-items:center;font-size:24px;font-weight:800}.legend{display:grid;gap:8px;margin-top:15px}.legend span:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:7px}
+.alert{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid #ffffff12;border-radius:12px;margin:8px 0;background:#09223a73}.alert .aicon{font-size:22px}.alert h4{margin:0;font-size:14px}.alert p{margin:3px 0 0;color:var(--muted);font-size:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:12px;color:#9db4ce;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;background:#061729;border:1px solid #3b86bd3d;color:#fff;border-radius:10px;padding:11px;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue)}.field.full{grid-column:1/-1}.modal{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.show{display:flex}.modalbox{width:min(620px,100%);padding:22px}.modalhead{display:flex;justify-content:space-between;align-items:center}.modalhead h2{margin:0}.close{border:0;background:none;color:#fff;font-size:26px;cursor:pointer}.toast{position:fixed;right:20px;bottom:20px;background:#071b31;border:1px solid var(--blue);border-radius:12px;padding:12px 16px;opacity:0;transform:translateY(12px);transition:.25s;z-index:100}.toast.show{opacity:1;transform:none}
+.mobile{display:none}.footer{text-align:center;color:#657f9e;font-size:12px;padding:10px}
+@media(max-width:1200px){.layout{grid-template-columns:215px 1fr}.machinegrid{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){.app{padding:9px}.topbar{height:65px;padding:7px 10px}.logo{height:48px}.status{display:none}.mobile{display:block}.layout{display:block}.sidebar{position:fixed;z-index:40;top:83px;bottom:9px;left:9px;width:245px;transform:translateX(-120%);transition:.25s;box-shadow:0 20px 60px #000}.sidebar.open{transform:none}.hero{padding:29px 21px;min-height:205px}.hero h1{font-size:43px}.hero p{font-size:16px}.kpis{grid-template-columns:1fr 1fr}.machinegrid,.grid2,.grid3{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.section{padding:15px}.table{min-width:580px}}
+@media(max-width:500px){.kpis{grid-template-columns:1fr}.hero h1{font-size:37px}.sectionhead{gap:8px;align-items:start}.sectionhead h2{font-size:17px}.activity-row{grid-template-columns:12px 38px 1fr}.event-time{display:none}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="topbar glass">
- <button class="icon-btn mobile-menu" onclick="toggleMenu()">☰</button>
- <img class="logo" src="logo.jpg" alt="American Engineering Inc.">
- <div class="status-area">
-  <div class="status"><span class="dot"></span><div><strong>Sistema Activo</strong><small>AEI Control v1.0</small></div></div>
-  <button class="icon-btn" onclick="notify('Configuración del sistema')">⚙</button>
-  <button class="icon-btn" onclick="notify('Perfil de usuario')">◯</button>
- </div>
+<button class="iconbtn mobile" onclick="toggleMenu()">☰</button>
+<img class="logo" src="logo.jpg" alt="American Engineering Inc.">
+<div class="topright"><div class="status"><span class="dot"></span><div><strong>Sistema Activo</strong><small>AEI Control v2.0</small></div></div><button class="iconbtn" onclick="showSettings()">⚙</button></div>
 </header>
 <div class="layout">
 <aside class="sidebar glass" id="sidebar">
 <nav class="nav">
- <button class="active" onclick="selectNav(this,'Inicio')"><span class="ico">⌂</span>Inicio</button>
- <button onclick="selectNav(this,'Máquinas')"><span class="ico">▣</span>Máquinas</button>
- <button onclick="selectNav(this,'Producción')"><span class="ico">▥</span>Producción</button>
- <button onclick="selectNav(this,'Alertas')"><span class="ico">♧</span>Alertas <span class="badge">3</span></button>
- <button onclick="selectNav(this,'Reportes')"><span class="ico">▤</span>Reportes</button>
- <button onclick="selectNav(this,'Configuración')"><span class="ico">⚙</span>Configuración</button>
+<button class="active" data-view="inicio" onclick="nav(this)">⌂ <span>Inicio</span></button>
+<button data-view="maquinas" onclick="nav(this)">▣ <span>Máquinas</span></button>
+<button data-view="produccion" onclick="nav(this)">▥ <span>Producción</span></button>
+<button data-view="alertas" onclick="nav(this)">♧ <span>Alertas</span><span class="badge" id="alertBadge">3</span></button>
+<button data-view="reportes" onclick="nav(this)">▤ <span>Reportes</span></button>
+<button data-view="config" onclick="nav(this)">⚙ <span>Configuración</span></button>
 </nav>
-<div class="sidebar-bottom"><div class="gear"></div><div class="tagline">Eficiencia&nbsp; • &nbsp;Control<br>Resultados</div></div>
+<div class="sidebar-bottom"><div class="gear"></div><div class="tagline">Eficiencia • Control<br>Resultados</div></div>
 </aside>
 <main class="main">
-<section class="hero glass"><div class="hero-content"><div class="welcome">Bienvenido a</div><h1>AEI Control</h1><p>Monitorea, controla y optimiza tu producción<br>en tiempo real.</p></div></section>
-<section class="kpis">
-<article class="kpi card green"><div class="kpi-icon">▣</div><div class="kpi-label">Máquinas Activas</div><div class="kpi-value">4 / 5</div><div class="kpi-sub">80% operativas</div><div class="progress"></div></article>
-<article class="kpi card blue"><div class="kpi-icon">▥</div><div class="kpi-label">Producción Hoy</div><div class="kpi-value">1,248</div><div class="kpi-sub">Piezas</div><div class="progress"></div></article>
-<article class="kpi card orange"><div class="kpi-icon">♧</div><div class="kpi-label">Alertas</div><div class="kpi-value">3</div><div class="kpi-sub">Requieren atención</div><div class="progress"></div></article>
-<article class="kpi card purple"><div class="kpi-icon">◷</div><div class="kpi-label">Tiempo de Operación</div><div class="kpi-value">18.6 h</div><div class="kpi-sub">Hoy</div><div class="progress"></div></article>
-</section>
-<section class="activity card">
-<div class="section-head"><h2>◷ &nbsp;Actividad Reciente</h2><a href="#" onclick="notify('Mostrando toda la actividad');return false">Ver todo →</a></div>
-<div class="activity-row"><span class="state-dot ok"></span><span class="event-icon">▣</span><div><div class="event-title">Máquina CNC-02</div><div class="event-sub">Producción completada - Lote #4587</div></div><span class="event-time">Hoy, 10:42 AM</span></div>
-<div class="activity-row"><span class="state-dot warn"></span><span class="event-icon">⚠</span><div><div class="event-title">Máquina CNC-03</div><div class="event-sub">Alerta de temperatura alta</div></div><span class="event-time">Hoy, 09:17 AM</span></div>
-<div class="activity-row"><span class="state-dot ok"></span><span class="event-icon">▤</span><div><div class="event-title">Máquina CNC-01</div><div class="event-sub">Reanudó operación</div></div><span class="event-time">Hoy, 08:55 AM</span></div>
-<div class="activity-row"><span class="state-dot info"></span><span class="event-icon">▥</span><div><div class="event-title">Producción</div><div class="event-sub">Meta del día alcanzada (78%)</div></div><span class="event-time">Hoy, 07:32 AM</span></div>
-<div class="activity-row"><span class="state-dot ok"></span><span class="event-icon">✣</span><div><div class="event-title">Sistema</div><div class="event-sub">Respaldo automático completado</div></div><span class="event-time">Hoy, 06:15 AM</span></div>
-</section>
-</main>
-<aside class="side">
-<section class="quick glass"><h2>Accesos Rápidos</h2>
-<div class="quick-item" onclick="notify('Módulo Máquinas')"><span>▣</span><span>Ver Máquinas</span><span>›</span></div>
-<div class="quick-item" onclick="notify('Módulo Producción')"><span>▥</span><span>Ver Producción</span><span>›</span></div>
-<div class="quick-item" onclick="notify('Historial de Alertas')"><span>♧</span><span>Historial de Alertas</span><span>›</span></div>
-<div class="quick-item" onclick="notify('Generando reporte...')"><span>▤</span><span>Generar Reporte</span><span>›</span></div>
-</section>
-<section class="system glass"><div class="system-head"><h2>Estado del Sistema</h2><span class="online">● &nbsp;En línea</span></div>
-<div class="sys-row"><span>▣ &nbsp; Servidor</span><span class="sys-ok">OK</span></div>
-<div class="sys-row"><span>▤ &nbsp; Base de Datos</span><span class="sys-ok">OK</span></div>
-<div class="sys-row"><span>♧ &nbsp; Red</span><span class="sys-ok">OK</span></div>
-<div class="sys-row"><span>⚙ &nbsp; Módulos</span><span class="sys-ok">OK</span></div></section>
-<section class="quote glass"><p>“La ingeniería construye el presente,<br>la tecnología impulsa el futuro.”</p></section>
-</aside>
+
+<section id="inicio" class="view active">
+<div class="hero glass"><div class="welcome">Bienvenido a</div><h1>AEI Control</h1><p>Monitorea, controla y optimiza tu producción<br>en tiempo real.</p></div>
+<div class="kpis">
+<div class="kpi card green"><div class="kicon">▣</div><div class="label">Máquinas Activas</div><div class="value" id="kMachines">4 / 5</div><div class="sub">80% operativas</div><div class="bar"><i style="width:80%"></i></div></div>
+<div class="kpi card blue"><div class="kicon">▥</div><div class="label">Producción Hoy</div><div class="value" id="kProduction">1,248</div><div class="sub">Piezas</div><div class="bar"><i style="width:75%"></i></div></div>
+<div class="kpi card orange"><div class="kicon">♧</div><div class="label">Alertas</div><div class="value" id="kAlerts">3</div><div class="sub">Requieren atención</div><div class="bar"><i style="width:42%"></i></div></div>
+<div class="kpi card purple"><div class="kicon">◷</div><div class="label">Tiempo de Operación</div><div class="value">18.6 h</div><div class="sub">Hoy</div><div class="bar"><i style="width:78%"></i></div></div>
 </div>
+<div class="grid2">
+<div class="section glass"><div class="sectionhead"><h2>Actividad Reciente</h2><small>Tiempo real</small></div><div id="homeActivity"></div></div>
+<div class="section glass"><div class="sectionhead"><h2>Producción semanal</h2><small>Últimos 7 días</small></div><div class="chart" id="homeChart"></div></div>
+</div>
+</section>
+
+<section id="maquinas" class="view">
+<div class="section glass"><div class="sectionhead"><div><h2>Máquinas CNC</h2><small>Supervisión y estado operativo</small></div><button class="btn primary" onclick="openMachineModal()">＋ Agregar máquina</button></div><div class="machinegrid" id="machineGrid"></div></div>
+<div class="section glass"><div class="sectionhead"><h2>Resumen de capacidad</h2></div><div class="grid3"><div><small>Disponibilidad</small><h2>92%</h2><div class="progressbar"><i style="width:92%"></i></div></div><div><small>Utilización</small><h2>78%</h2><div class="progressbar"><i style="width:78%"></i></div></div><div><small>Eficiencia</small><h2>86%</h2><div class="progressbar"><i style="width:86%"></i></div></div></div></div>
+</section>
+
+<section id="produccion" class="view">
+<div class="kpis"><div class="kpi card blue"><div class="kicon">▥</div><div class="label">Piezas hoy</div><div class="value">1,248</div><div class="sub">+12.4% vs. ayer</div></div><div class="kpi card green"><div class="kicon">✓</div><div class="label">Buenas</div><div class="value">1,217</div><div class="sub">97.5% calidad</div></div><div class="kpi card orange"><div class="kicon">!</div><div class="label">Scrap</div><div class="value">31</div><div class="sub">2.5%</div></div><div class="kpi card purple"><div class="kicon">◷</div><div class="label">OEE</div><div class="value">86%</div><div class="sub">Objetivo 85%</div></div></div>
+<div class="grid2"><div class="section glass"><div class="sectionhead"><h2>Producción por día</h2></div><div class="chart" id="prodChart"></div></div><div class="section glass"><div class="sectionhead"><h2>Distribución</h2></div><div class="donut"></div><div class="legend"><span style="--c:#1597ff">CNC-01 — 62%</span><span style="--c:#00e58a">CNC-02 — 20%</span><span style="--c:#ffae19">CNC-03 — 10%</span><span style="--c:#995cff">CNC-04 — 8%</span></div></div></div>
+<div class="section glass"><div class="sectionhead"><h2>Últimos lotes</h2><button class="btn" onclick="exportCSV()">Exportar CSV</button></div><div class="tablewrap"><table class="table"><thead><tr><th>Lote</th><th>Máquina</th><th>Producto</th><th>Piezas</th><th>Calidad</th><th>Estado</th></tr></thead><tbody id="lotTable"></tbody></table></div></div>
+</section>
+
+<section id="alertas" class="view">
+<div class="section glass"><div class="sectionhead"><div><h2>Centro de Alertas</h2><small>Incidentes y avisos del sistema</small></div><button class="btn" onclick="clearAlerts()">Marcar atendidas</button></div><div id="alertsList"></div></div>
+</section>
+
+<section id="reportes" class="view">
+<div class="section glass"><div class="sectionhead"><div><h2>Reportes</h2><small>Indicadores y exportación</small></div><button class="btn primary" onclick="exportCSV()">Exportar datos</button></div>
+<div class="grid2"><div class="card" style="padding:18px"><h3>Producción mensual</h3><div class="chart" id="reportChart"></div></div><div class="card" style="padding:18px"><h3>Rendimiento</h3><div style="margin:16px 0">Disponibilidad <b style="float:right">92%</b><div class="progressbar"><i style="width:92%"></i></div></div><div style="margin:16px 0">Performance <b style="float:right">89%</b><div class="progressbar"><i style="width:89%"></i></div></div><div style="margin:16px 0">Calidad <b style="float:right">97.5%</b><div class="progressbar"><i style="width:97.5%"></i></div></div></div></div></div>
+</section>
+
+<section id="config" class="view">
+<div class="section glass"><div class="sectionhead"><div><h2>Configuración</h2><small>Preferencias locales de AEI Control</small></div><button class="btn primary" onclick="saveSettings()">Guardar</button></div>
+<div class="formgrid"><div class="field"><label>Nombre de empresa</label><input id="company" value="American Engineering Inc."></div><div class="field"><label>Nombre del sistema</label><input id="systemName" value="AEI Control"></div><div class="field"><label>Zona horaria</label><select id="timezone"><option>America/New_York</option><option>America/Chicago</option><option>America/Los_Angeles</option></select></div><div class="field"><label>Intervalo de actualización</label><select id="refresh"><option value="30">30 segundos</option><option value="60">1 minuto</option><option value="300">5 minutos</option></select></div><div class="field full"><label>Notas</label><textarea id="notes" rows="4" placeholder="Notas operativas..."></textarea></div></div></div>
+<div class="section glass"><div class="sectionhead"><h2>Datos locales</h2></div><button class="btn" onclick="backupData()">Crear respaldo</button> <button class="btn danger" onclick="resetData()">Restablecer datos de demostración</button></div>
+</section>
+</main></div>
 <div class="footer">© 2026 American Engineering Inc. — AEI Control</div>
 </div>
+
+<div class="modal" id="modal"><div class="modalbox glass"><div class="modalhead"><h2 id="modalTitle">Agregar máquina</h2><button class="close" onclick="closeModal()">×</button></div><div id="modalBody" style="margin-top:16px"></div></div></div>
 <div class="toast" id="toast"></div>
+
 <script>
-function notify(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),1800)}
-function selectNav(btn,name){document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');notify('Módulo: '+name);if(innerWidth<=800)document.getElementById('sidebar').classList.remove('open')}
-function toggleMenu(){document.getElementById('sidebar').classList.toggle('open')}
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+const defaultData={
+ machines:[
+  {id:1,name:"CNC-01",model:"Haas VF-2",status:"Operativa",hours:"8.4 h",pieces:412,temp:"68°C",alarm:"Sin alarmas"},
+  {id:2,name:"CNC-02",model:"Haas VF-3",status:"Operativa",hours:"7.2 h",pieces:386,temp:"71°C",alarm:"Sin alarmas"},
+  {id:3,name:"CNC-03",model:"Haas ST-20",status:"Advertencia",hours:"2.1 h",pieces:218,temp:"86°C",alarm:"Temperatura alta"},
+  {id:4,name:"CNC-04",model:"Haas VF-4",status:"Operativa",hours:"0.9 h",pieces:232,temp:"67°C",alarm:"Sin alarmas"},
+  {id:5,name:"CNC-05",model:"Haas Mini Mill",status:"Detenida",hours:"0.0 h",pieces:0,temp:"24°C",alarm:"Mantenimiento"}
+ ],
+ alerts:[
+  {id:1,type:"warning",title:"CNC-03 — Temperatura alta",desc:"Temperatura actual 86°C. Revisar refrigeración.",time:"Hoy, 09:17 AM"},
+  {id:2,type:"danger",title:"CNC-05 — Mantenimiento",desc:"Mantenimiento preventivo pendiente.",time:"Hoy, 08:40 AM"},
+  {id:3,type:"info",title:"Producción — Meta diaria",desc:"Se alcanzó el 78% de la meta programada.",time:"Hoy, 07:32 AM"}
+ ],
+ lots:[
+  ["#4587","CNC-02","Pieza A-204",386,"99.1%","Completado"],
+  ["#4586","CNC-01","Pieza A-204",412,"98.8%","Completado"],
+  ["#4585","CNC-04","Pieza B-118",232,"97.9%","En proceso"],
+  ["#4584","CNC-03","Pieza C-330",218,"95.2%","Revisión"]
+ ]
+};
+let data=JSON.parse(localStorage.getItem("aeiData")||"null")||structuredClone(defaultData);
+function persist(){localStorage.setItem("aeiData",JSON.stringify(data));}
+function notify(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove("show"),1900)}
+function toggleMenu(){document.getElementById("sidebar").classList.toggle("open")}
+function nav(btn){
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById(btn.dataset.view).classList.add("active");
+ render(); if(innerWidth<=800)toggleMenu();
+}
+function statusClass(s){return s==="Operativa"?"green":s==="Advertencia"?"orange":"red"}
+function renderMachines(){
+ const g=document.getElementById("machineGrid");g.innerHTML="";
+ data.machines.forEach(m=>{
+  const c=document.createElement("div");c.className="machine card";
+  c.innerHTML=`<div class="mhead"><div><h3>${m.name}</h3><p>${m.model}</p></div><span class="pill ${statusClass(m.status)}">${m.status}</span></div>
+  <div class="metrics"><div class="metric"><b>${m.hours}</b><span>Operación</span></div><div class="metric"><b>${m.pieces}</b><span>Piezas</span></div><div class="metric"><b>${m.temp}</b><span>Temperatura</span></div><div class="metric"><b>${m.alarm}</b><span>Estado</span></div></div>
+  <div class="actions"><button class="btn small" onclick="machineDetail(${m.id})">Ver detalle</button><button class="btn small" onclick="editMachine(${m.id})">Editar</button></div>`;
+  g.appendChild(c);
+ });
+ const active=data.machines.filter(m=>m.status==="Operativa").length;
+ document.getElementById("kMachines").textContent=`${active} / ${data.machines.length}`;
+}
+function machineDetail(id){const m=data.machines.find(x=>x.id===id);openModal("Detalle — "+m.name,`<div class="grid2"><div><small>Modelo</small><h3>${m.model}</h3></div><div><small>Estado</small><h3>${m.status}</h3></div><div><small>Horas</small><h3>${m.hours}</h3></div><div><small>Producción</small><h3>${m.pieces} piezas</h3></div><div><small>Temperatura</small><h3>${m.temp}</h3></div><div><small>Alarma</small><h3>${m.alarm}</h3></div></div><button class="btn primary" style="margin-top:15px" onclick="notify('Comando enviado a '+m.name);closeModal()">Simular comando</button>`)}
+function machineForm(m={}){
+ openModal(m.id?"Editar máquina":"Agregar máquina",`<div class="formgrid">
+ <div class="field"><label>Nombre</label><input id="fmName" value="${m.name||"CNC-06"}"></div>
+ <div class="field"><label>Modelo</label><input id="fmModel" value="${m.model||"Haas"}"></div>
+ <div class="field"><label>Estado</label><select id="fmStatus"><option ${m.status==="Operativa"?"selected":""}>Operativa</option><option ${m.status==="Advertencia"?"selected":""}>Advertencia</option><option ${m.status==="Detenida"?"selected":""}>Detenida</option></select></div>
+ <div class="field"><label>Horas</label><input id="fmHours" value="${m.hours||"0.0 h"}"></div>
+ <div class="field"><label>Piezas</label><input id="fmPieces" type="number" value="${m.pieces||0}"></div>
+ <div class="field"><label>Temperatura</label><input id="fmTemp" value="${m.temp||"25°C"}"></div></div>
+ <button class="btn primary" style="margin-top:15px" onclick="saveMachine(${m.id||0})">Guardar máquina</button>`);
+}
+function openMachineModal(){machineForm()}
+function editMachine(id){machineForm(data.machines.find(x=>x.id===id))}
+function saveMachine(id){
+ const obj={id:id||Date.now(),name:fmName.value.trim()||"CNC",model:fmModel.value.trim()||"Haas",status:fmStatus.value,hours:fmHours.value,pieces:Number(fmPieces.value)||0,temp:fmTemp.value,alarm:fmStatus.value==="Operativa"?"Sin alarmas":"Revisar"};
+ if(id)data.machines=data.machines.map(x=>x.id===id?obj:x);else data.machines.push(obj);persist();closeModal();render();notify("Máquina guardada");
+}
+function renderAlerts(){
+ const box=document.getElementById("alertsList");box.innerHTML="";
+ data.alerts.forEach(a=>{const d=document.createElement("div");d.className="alert";const ico=a.type==="danger"?"⛔":a.type==="warning"?"⚠":"ℹ";d.innerHTML=`<div class="aicon">${ico}</div><div style="flex:1"><h4>${a.title}</h4><p>${a.desc}</p><small style="color:#7892ae">${a.time}</small></div><button class="btn small" onclick="dismissAlert(${a.id})">Atender</button>`;box.appendChild(d)});
+ document.getElementById("alertBadge").textContent=data.alerts.length;
+ document.getElementById("kAlerts").textContent=data.alerts.length;
+}
+function dismissAlert(id){data.alerts=data.alerts.filter(a=>a.id!==id);persist();render();notify("Alerta atendida")}
+function clearAlerts(){data.alerts=[];persist();render();notify("Todas las alertas fueron atendidas")}
+function bars(id,vals,labels){const el=document.getElementById(id);if(!el)return;el.innerHTML="";const max=Math.max(...vals);vals.forEach((v,i)=>{const c=document.createElement("div");c.className="col";c.innerHTML=`<i style="height:${Math.max(12,v/max*82)}%"></i><span>${labels[i]}</span>`;el.appendChild(c)})}
+function renderCharts(){bars("homeChart",[62,71,58,82,76,90,78],["L","M","X","J","V","S","D"]);bars("prodChart",[140,168,155,184,176,205,190],["L","M","X","J","V","S","D"]);bars("reportChart",[55,62,70,66,78,81,86,90],["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago"])}
+function renderLots(){const t=document.getElementById("lotTable");if(!t)return;t.innerHTML=data.lots.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}
+function renderActivity(){const el=document.getElementById("homeActivity");if(!el)return;const items=[["●","CNC-02","Producción completada — Lote #4587","Hoy, 10:42 AM"],["⚠","CNC-03","Alerta de temperatura alta","Hoy, 09:17 AM"],["✓","CNC-01","Reanudó operación","Hoy, 08:55 AM"],["▥","Producción","Meta del día alcanzada (78%)","Hoy, 07:32 AM"]];el.innerHTML=items.map(x=>`<div style="display:grid;grid-template-columns:28px 1fr auto;gap:10px;padding:12px 0;border-bottom:1px solid #fff1"><b>${x[0]}</b><div><b>${x[1]}</b><small style="display:block;color:#8198b2">${x[2]}</small></div><small style="color:#7892ae">${x[3]}</small></div>`).join("")}
+function render(){renderMachines();renderAlerts();renderLots();renderActivity();renderCharts()}
+function openModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function showSettings(){document.querySelector('[data-view="config"]').click()}
+function saveSettings(){localStorage.setItem("aeiSettings",JSON.stringify({company:company.value,systemName:systemName.value,timezone:timezone.value,refresh:refresh.value,notes:notes.value}));notify("Configuración guardada")}
+function backupData(){const blob=new Blob([JSON.stringify({data,settings:JSON.parse(localStorage.getItem("aeiSettings")||"{}")},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="aei-control-backup.json";a.click();URL.revokeObjectURL(a.href);notify("Respaldo creado")}
+function resetData(){if(confirm("¿Restablecer los datos de demostración?")){data=structuredClone(defaultData);persist();render();notify("Datos restablecidos")}}
+function exportCSV(){const rows=[["Lote","Máquina","Producto","Piezas","Calidad","Estado"],...data.lots];const csv=rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="aei-produccion.csv";a.click();notify("CSV exportado")}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+render();
 </script>
 </body>
 </html>
