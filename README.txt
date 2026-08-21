@@ -77,3 +77,8 @@ Incluye un chat integrado estilo interfaz de juego: botón flotante, panel propi
 respuestas sobre datos de producción/máquinas/órdenes/mantenimiento/alertas/inventario,
 y accesos rápidos. Funciona localmente sin API externa; la conexión a un modelo de IA
 externo puede añadirse después sin cambiar la interfaz.
+
+FIX CHAT
+--------
+Se corrigió un error de JavaScript que impedía arrancar toda la aplicación en algunos navegadores.
+La navegación y el Asistente AEI ahora se inicializan correctamente. Caché PWA v4.
