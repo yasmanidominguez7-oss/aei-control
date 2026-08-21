@@ -36,7 +36,7 @@ button,input,select,textarea{font:inherit}.app{min-height:100vh;padding:15px}.gl
 <body>
 <div class="app">
 <header class="top glass">
-<button class="icon mobile" onclick="toggleMenu()">☰</button>
+<button class="icon mobile" id="mobileMenuBtn" type="button" aria-label="Abrir menú">☰</button>
 <img class="logo" src="logo.jpg" alt="American Engineering Inc.">
 <div class="topright"><div class="status"><span class="dot"></span><div><strong>Sistema Activo</strong><small>AEI Control</small></div></div><button class="icon" onclick="go('config')">⚙</button></div>
 </header>
@@ -171,7 +171,7 @@ const DEMO={
 let data=JSON.parse(localStorage.getItem("aeiComplete")||"null")||structuredClone(DEMO);
 function save(){localStorage.setItem("aeiComplete",JSON.stringify(data))}
 function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(window.__t);window.__t=setTimeout(()=>t.classList.remove("show"),1900)}
-function toggleMenu(){document.getElementById("sidebar").classList.toggle("open")}
+function toggleMenu(){document.getElementById("sidebar").classList.toggle("open")}document.getElementById("mobileMenuBtn").addEventListener("click",toggleMenu);
 function go(id,btn){
  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById(id).classList.add("active");
  if(btn){document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}
@@ -180,6 +180,20 @@ function go(id,btn){
 function openModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("modal").classList.add("show")}
 function closeModal(){document.getElementById("modal").classList.remove("show")}
 document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")closeModal()}
+document.querySelector(".nav").addEventListener("click",function(e){
+ const b=e.target.closest("button[data-view]"); if(!b)return;
+ e.preventDefault();
+ const id=b.getAttribute("data-view");
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+ const target=document.getElementById(id);
+ if(target)target.classList.add("active");
+ document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active");
+ if(window.innerWidth<=800)document.getElementById("sidebar").classList.remove("open");
+ render();
+});
+window.addEventListener("pageshow",()=>{render();});
+
 function machineClass(s){return s==="Operativa"?"green":s==="Advertencia"?"yellow":"red"}
 function renderMachines(){
  const g=document.getElementById("machineGrid");if(!g)return;g.innerHTML="";

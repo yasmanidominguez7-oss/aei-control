@@ -66,3 +66,7 @@ La conexión con CNC físicas, sensores, PLC, MTConnect, OPC UA o una base de da
 central requiere posteriormente un servidor/gateway industrial; GitHub Pages por sí
 solo no puede hablar directamente con una máquina CNC. La interfaz y los módulos
 están preparados para esa integración sin cambiar el flujo sencillo para el operador.
+
+PWA MÓVIL
+---------
+Esta versión incluye navegación táctil reforzada y caché v2 para evitar que la aplicación instalada conserve una versión anterior.
